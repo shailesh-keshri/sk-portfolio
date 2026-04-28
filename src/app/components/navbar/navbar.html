@@ -1,0 +1,23 @@
+<nav class="navbar" [class.on-scroll]="isScrolled" [class.open]="isMenuOpen">
+  <div class="container nav-content">
+    <div class="logo">
+      <a routerLink="/" (click)="closeMenu()">
+        <span class="gradient-text">Shailesh K.</span>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a routerLink="/" fragment="about" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a></li>
+      <li><a routerLink="/" fragment="skills" (click)="closeMenu()" routerLinkActive="active">Skills</a></li>
+      <li><a routerLink="/" fragment="experience" (click)="closeMenu()" routerLinkActive="active">Experience</a></li>
+      <li><a routerLink="/" fragment="projects" (click)="closeMenu()" routerLinkActive="active">Work</a></li>
+      <li><a routerLink="/resume" (click)="closeMenu()" class="btn-resume">Resume</a></li>
+    </ul>
+
+    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+  </div>
+</nav>

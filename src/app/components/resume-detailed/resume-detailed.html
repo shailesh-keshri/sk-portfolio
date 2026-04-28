@@ -1,0 +1,112 @@
+<div class="resume-container">
+  <div class="resume-actions no-print">
+    <a routerLink="/" class="btn-close" title="Back to Portfolio">✕</a>
+    <div class="action-group">
+      <a routerLink="/resume" class="btn-secondary">View Normal Resume</a>
+      <button (click)="downloadPdf()" class="btn-primary">Download Detailed PDF</button>
+    </div>
+  </div>
+
+  <div class="resume-paper jakes-template detailed-version">
+    <!-- Centered Header -->
+    <header class="jakes-header">
+      <h1>SHAILESH KESHRI</h1>
+      <p class="jakes-subtitle">Full-Stack Developer | Project-Focused Portfolio</p>
+      <div class="jakes-contact">
+        <span>9340728264</span> | 
+        <span>shailesh0398@gmail.com</span> |
+        <a href="https://linkedin.com/in/shailesh-keshri" target="_blank">linkedin.com/in/shailesh-keshri</a> |
+        <a href="https://github.com/shailesh-keshri" target="_blank">github.com/shailesh-keshri</a>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">SUMMARY</h2>
+      <hr>
+      <p>{{ resumeService.resumeData().summary }}</p>
+    </section>
+
+    <!-- Skills -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">TECHNICAL SKILLS</h2>
+      <hr>
+      <div class="jakes-skills">
+        <div *ngFor="let group of resumeService.resumeData().skills" class="skill-row">
+          <span class="jakes-bold">{{ group.category }}:</span> {{ group.items.join(', ') }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Experience as Projects -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">PROFESSIONAL EXPERIENCE & INTERNAL PROJECTS</h2>
+      <hr>
+      <div class="company-block" *ngFor="let exp of resumeService.detailedExperience()">
+        <div class="jakes-row">
+          <span class="jakes-bold large">{{ exp.company }}</span>
+          <span class="jakes-right">{{ exp.period }}</span>
+        </div>
+        <div class="jakes-row secondary">
+          <span class="jakes-italic">{{ exp.role }}</span>
+          <span class="jakes-right">{{ exp.location }}</span>
+        </div>
+        
+        <!-- Internal Projects Loop -->
+        <div class="internal-project" *ngFor="let proj of exp.internalProjects">
+            <div class="jakes-row project-head">
+                <span class="jakes-bold highlight">Project: {{ proj.name }}</span>
+            </div>
+            <p *ngIf="proj.summary" class="project-summary">{{ proj.summary }}</p>
+            <ul class="jakes-bullets">
+                <li *ngFor="let bullet of proj.bullets">{{ bullet }}</li>
+            </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">OTHER PERSONAL PROJECTS</h2>
+      <hr>
+      <div class="jakes-item" *ngFor="let project of resumeService.resumeData().projects">
+        <div class="jakes-row">
+          <span class="jakes-bold">{{ project.title }}</span>
+          <span class="jakes-right">{{ project.technologies }}</span>
+        </div>
+        <ul class="jakes-bullets">
+          <li *ngFor="let bullet of project.bullets">{{ bullet }}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">EDUCATION</h2>
+      <hr>
+      <div class="jakes-item">
+        <div class="jakes-row">
+          <span class="jakes-bold">R.G.P.V. University, Bhopal</span>
+          <span class="jakes-right">Jun 2017 – Jul 2021</span>
+        </div>
+        <div class="jakes-row">
+          <span class="jakes-italic">Bachelor of Technology in Computer Science</span>
+          <span class="jakes-right">Bhopal, M.P.</span>
+        </div>
+        <div class="jakes-row sub-description">
+          <span>Millennium Institute of Technology and Science</span>
+        </div>
+      </div>
+      <div class="jakes-item">
+        <div class="jakes-row">
+          <span class="jakes-bold">H.N.K Inter College, Arrah</span>
+          <span class="jakes-right">May 2014 – May 2016</span>
+        </div>
+        <div class="jakes-row">
+          <span class="jakes-italic">Intermediate in Science</span>
+          <span class="jakes-right">Arrah, Bihar</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

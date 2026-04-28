@@ -1,0 +1,27 @@
+<section id="skills" class="skills-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Technical <span class="gradient-text">Expertise</span></h2>
+      <p class="section-subtitle">Proficient in modern web technologies and AI-augmented development workflows.</p>
+    </div>
+    
+    <div class="skills-grid">
+      @for (category of skillCategories; track category.name) {
+        <div class="skill-card glass reveal reveal-delay-{{ $index + 1 }}" [class.highlight-card]="category.highlight">
+          <div class="card-header">
+            <span class="icon">{{ category.icon }}</span>
+            <h3>{{ category.name }}</h3>
+          </div>
+          <ul class="skill-list">
+            @for (skill of category.skills; track skill) {
+              <li class="skill-item">
+                <span class="dot"></span>
+                {{ skill }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

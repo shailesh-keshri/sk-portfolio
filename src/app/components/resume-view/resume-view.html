@@ -1,0 +1,107 @@
+<div class="resume-container">
+  <div class="resume-actions no-print">
+    <a routerLink="/" class="btn-close" title="Back to Portfolio">✕</a>
+    <div class="action-group">
+      <a routerLink="/resume-detailed" class="btn-secondary">View Detailed Version</a>
+      <a routerLink="/cover-letter" class="btn-secondary">View Cover Letter</a>
+      <button (click)="downloadPdf()" class="btn-primary">Download PDF</button>
+    </div>
+  </div>
+
+  <div class="resume-paper jakes-template" [class.is-tailored]="resumeService.isTailored()">
+    <!-- Centered Header -->
+    <header class="jakes-header">
+      <h1>SHAILESH KESHRI</h1>
+      <p class="jakes-subtitle">Full-Stack Developer</p>
+      <div class="jakes-contact">
+        <span>9340728264</span> | 
+        <span>shailesh0398@gmail.com</span> |
+        <a href="https://linkedin.com/in/shailesh-keshri" target="_blank">linkedin.com/in/shailesh-keshri</a> |
+        <a href="https://github.com/shailesh-keshri" target="_blank">github.com/shailesh-keshri</a>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">SUMMARY</h2>
+      <hr>
+      <p>{{ resumeService.resumeData().summary }}</p>
+    </section>
+
+    <!-- Skills (Moved up) -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">TECHNICAL SKILLS</h2>
+      <hr>
+      <div class="jakes-skills">
+        <div *ngFor="let group of resumeService.resumeData().skills" class="skill-row">
+          <span class="jakes-bold">{{ group.category }}:</span> {{ group.items.join(', ') }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">EXPERIENCE</h2>
+      <hr>
+      <div class="jakes-item" *ngFor="let exp of resumeService.resumeData().experience">
+        <div class="jakes-row">
+          <span class="jakes-bold">{{ exp.company }}</span>
+          <span class="jakes-right">{{ exp.period }}</span>
+        </div>
+        <div class="jakes-row secondary">
+          <span class="jakes-italic">{{ exp.role }}</span>
+          <span class="jakes-right">{{ exp.location }}</span>
+        </div>
+        <ul class="jakes-bullets">
+          <li *ngFor="let bullet of exp.bullets">{{ bullet }}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">PERSONAL PROJECTS</h2>
+      <hr>
+      <div class="jakes-item" *ngFor="let project of resumeService.resumeData().projects">
+        <div class="jakes-row">
+          <span class="jakes-bold">{{ project.title }}</span>
+          <span class="jakes-right">{{ project.technologies }}</span>
+        </div>
+        <ul class="jakes-bullets">
+          <li *ngFor="let bullet of project.bullets">{{ bullet }}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education (Moved to bottom) -->
+    <section class="jakes-section">
+      <h2 class="jakes-section-title">EDUCATION</h2>
+      <hr>
+      <div class="jakes-item">
+        <div class="jakes-row">
+          <span class="jakes-bold">R.G.P.V. University, Bhopal</span>
+          <span class="jakes-right">Jun 2017 – Jul 2021</span>
+        </div>
+        <div class="jakes-row">
+          <span class="jakes-italic">Bachelor of Technology in Computer Science</span>
+          <span class="jakes-right">Bhopal, M.P.</span>
+        </div>
+        <div class="jakes-row sub-description">
+          <span>Millennium Institute of Technology and Science</span>
+        </div>
+      </div>
+      <div class="jakes-item">
+        <div class="jakes-row">
+          <span class="jakes-bold">H.N.K Inter College, Arrah</span>
+          <span class="jakes-right">May 2014 – May 2016</span>
+        </div>
+        <div class="jakes-row">
+          <span class="jakes-italic">Intermediate in Science</span>
+          <span class="jakes-right">Arrah, Bihar</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <app-job-tailor class="no-print"></app-job-tailor>
+</div>

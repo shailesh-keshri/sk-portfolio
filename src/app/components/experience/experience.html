@@ -1,0 +1,39 @@
+<section id="experience" class="experience-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Professional <span class="gradient-text">Journey</span></h2>
+      <p class="section-subtitle">Over 3 years of building enterprise-grade security and ed-tech solutions.</p>
+    </div>
+    
+    <div class="timeline">
+      @for (exp of experiences; track exp.company) {
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass">
+            <div class="exp-header">
+              <div class="exp-title">
+                <h3>{{ exp.role }}</h3>
+                <span class="company">{{ exp.company }}</span>
+              </div>
+              <div class="exp-meta">
+                <span class="period">{{ exp.period }}</span>
+                <span class="location">{{ exp.location }}</span>
+              </div>
+            </div>
+            
+            <p class="exp-description">{{ exp.description }}</p>
+            
+            <ul class="achievement-list">
+              @for (item of exp.achievements; track item) {
+                <li>
+                  <span class="marker">></span>
+                  {{ item }}
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

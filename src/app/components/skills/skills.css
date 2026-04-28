@@ -1,0 +1,115 @@
+.skills-section {
+  padding: var(--space-xl) 0;
+  background: var(--bg-alt);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.skill-card {
+  padding: var(--space-md);
+  border-radius: 12px;
+  transition: var(--transition-fast);
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.1);
+}
+
+.highlight-card {
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card::before {
+  content: 'TOP-TIER';
+  position: absolute;
+  top: 10px;
+  right: -25px;
+  background: var(--primary);
+  color: var(--bg-color);
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 4px 30px;
+  transform: rotate(45deg);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.icon {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 5px var(--primary);
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media print {
+  .skills-section {
+    padding: var(--space-md) 0;
+  }
+  .skill-card {
+    border: 1px solid #ddd !important;
+    background: none !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  .skill-item {
+    color: black !important;
+  }
+}

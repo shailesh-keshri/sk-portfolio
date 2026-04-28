@@ -1,0 +1,140 @@
+.experience-section {
+  padding: var(--space-xl) 0;
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0;
+}
+
+/* Vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--secondary), transparent);
+  opacity: 0.3;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-lg);
+  padding-left: 60px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 11px;
+  top: 25px;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-color);
+  border: 4px solid var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary);
+  z-index: 2;
+}
+
+.timeline-content {
+  padding: var(--space-md);
+  border-radius: 16px;
+  transition: var(--transition-fast);
+}
+
+.timeline-content:hover {
+  border-color: var(--primary);
+  transform: translateX(10px);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.exp-title h3 {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.company {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.exp-meta {
+  text-align: right;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.period {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.exp-description {
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: var(--space-sm);
+}
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement-list li {
+  display: flex;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.marker {
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .exp-header {
+    flex-direction: column;
+  }
+  .exp-meta {
+    text-align: left;
+  }
+  .timeline-content:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  .timeline::before, .timeline-dot {
+    display: none;
+  }
+  .timeline-item {
+    padding-left: 0;
+    page-break-inside: avoid;
+  }
+  .timeline-content {
+    border: 1px solid #eee !important;
+    background: none !important;
+    padding: 0;
+  }
+  .company { color: black !important; }
+  .marker { color: black !important; }
+}

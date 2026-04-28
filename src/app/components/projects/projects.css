@@ -1,0 +1,121 @@
+.projects-section {
+  padding: var(--space-xl) 0;
+  background: var(--bg-alt);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-lg);
+}
+
+.project-card {
+  padding: var(--space-md);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: var(--transition-fast);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--secondary);
+  box-shadow: 0 15px 40px -10px rgba(188, 0, 255, 0.15);
+}
+
+.project-header {
+  margin-bottom: var(--space-sm);
+}
+
+.project-type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-top: 4px;
+}
+
+.project-description {
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-size: 0.95rem;
+}
+
+.project-highlights {
+  flex-grow: 1;
+  margin-bottom: var(--space-md);
+}
+
+.project-highlights h4 {
+  font-size: 0.875rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.project-highlights ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.project-highlights li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.project-highlights li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--secondary);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tag {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  transition: var(--transition-fast);
+}
+
+.project-card:hover .tag {
+  border-color: var(--secondary);
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .project-card {
+    border: 1px solid #eee !important;
+    background: none !important;
+    page-break-inside: avoid;
+  }
+  .tag {
+    border: 1px solid #ddd !important;
+    color: black !important;
+  }
+  .project-type { color: black !important; }
+}

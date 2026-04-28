@@ -1,0 +1,61 @@
+<div class="resume-container">
+  <div class="resume-actions no-print">
+    <a routerLink="/" class="btn-close" title="Back to Portfolio">✕</a>
+    <div class="action-group">
+      <a routerLink="/resume" class="btn-secondary">Back to Resume</a>
+      <button (click)="downloadPdf()" class="btn-primary">Download PDF</button>
+    </div>
+  </div>
+
+  <div class="resume-paper" [class.is-tailored]="coverLetterService.isTailored()">
+    <header class="cover-header">
+      <div class="header-top">
+        <h1>Shailesh Keshri</h1>
+        <span class="tailored-badge" *ngIf="coverLetterService.isTailored()">✨ AI Tailored</span>
+      </div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 8.67V17a2 2 0 0 0 2 2h17a2 2 0 0 0 2-2V8.67l-8.5 5.33-8.5-5.33zm21-1.34V7a2 2 0 0 0-2-2h-17a2 2 0 0 0-2 2v.33L12 12.67l10.5-5.34z"/></svg>
+          <span>shailesh0398@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.82 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <span>9340728264</span>
+        </div>
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.4-2.03 1.06-2.74-.11-.25-.46-1.31.09-2.75 0 0 .84-.28 2.75 1.02.8-.23 1.65-.35 2.5-.35.85 0 1.7.12 2.5.35 1.91-1.3 2.75-1.02 2.75-1.02.55 1.44.2 2.5.1 2.75.66.71 1.06 1.63 1.06 2.74 0 3.82-2.34 4.66-4.57 4.91.36.31.69.93.69 1.88v2.79c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          <a href="https://github.com/shailesh-keshri" target="_blank">github.com/shailesh-keshri</a>
+        </div>
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          <a href="https://www.linkedin.com/in/shailesh-keshri-364620177" target="_blank">linkedin.com/in/shailesh-keshri</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="cover-content">
+      <p class="date">{{ coverLetterService.coverData().date }}</p>
+
+      <div class="recipient">
+        <p>Hiring Manager</p>
+        <p><strong>{{ coverLetterService.coverData().company }}</strong></p>
+      </div>
+
+      <p class="subject"><strong>Subject: Application for {{ coverLetterService.coverData().role }} – Shailesh Keshri</strong></p>
+
+      <p>Dear Hiring Manager,</p>
+
+      <p *ngFor="let para of coverLetterService.coverData().content">
+        {{ para }}
+      </p>
+
+      <p>Sincerely,</p>
+      
+      <div class="signature">
+        <p><strong>Shailesh Keshri</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <app-job-tailor class="no-print"></app-job-tailor>
+</div>

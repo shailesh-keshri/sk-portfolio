@@ -1,0 +1,44 @@
+@import '../resume-view/resume-view.css';
+
+.detailed-version {
+    padding-bottom: 30mm !important; /* Ensure it stays looking like a 2-page doc */
+}
+
+.company-block {
+    margin-bottom: 25px;
+    padding: 10px;
+    background: rgba(0, 119, 204, 0.02);
+    border-radius: 4px;
+}
+
+.jakes-bold.large {
+    font-size: 13pt;
+    color: var(--text-dark, #000);
+}
+
+.internal-project {
+    margin-top: 15px;
+    margin-left: 10px;
+    border-left: 2px solid #0077cc;
+    padding-left: 15px;
+}
+
+.highlight {
+    color: #0077cc;
+    font-size: 11pt;
+}
+
+.project-summary {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #666;
+    margin: 4px 0;
+}
+
+.project-head {
+    margin-bottom: 5px;
+}
+
+.jakes-bullets {
+    margin-bottom: 12px;
+}
