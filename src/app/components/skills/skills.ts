@@ -13,18 +13,18 @@ export class Skills {
     {
       name: 'Frontend',
       icon: 'code',
-      skills: ['Angular', 'React', 'TypeScript', 'JavaScript', 'HTML5/CSS3', 'Ionic']
+      skills: ['Angular', 'TypeScript', 'JavaScript', 'HTML5/CSS3', 'React']
     },
     {
       name: 'Backend & Database',
       icon: 'database',
-      skills: ['.NET C#', 'RESTful APIs', 'MySQL (Optimization)', 'SQL Server']
+      skills: ['Python', 'C#', 'RESTful APIs', 'SQL',]
     },
     {
       name: 'AI & Innovation',
       icon: 'cpu',
       highlight: true,
-      skills: ['Antigravity', 'Claude', 'ChatGPT', 'Gemini', 'Prompt Engineering']
+      skills: ['Antigravity', 'Claude', 'ChatGPT', 'Gemini']
     },
     {
       name: 'DevOps & Tools',

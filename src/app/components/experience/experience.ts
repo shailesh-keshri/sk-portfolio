@@ -13,28 +13,29 @@ export class Experience {
     {
       company: 'SISA Forensic-driven Cybersecurity',
       location: 'Bangalore, KA',
-      role: 'Associate Consultant (Full-Stack Developer)',
+      role: 'Software Engineer',
       period: 'Jun 2024 – Present',
-      description: 'Lead developer for enterprise-grade Managed Detection & Response (MXDR) and unified security platforms.',
+      description: 'Develop and maintain enterprise-grade Managed Detection & Response (MXDR) and compliance platforms.',
       achievements: [
-        'Architected ProAct security components using Angular and .NET C# for SOC operations.',
-        'Unified security, compliance, and privacy products under the SISA One platform.',
-        'Engineered a real-time Shift Handover module with automated SOC operational metrics.',
-        'Optimized MySQL schemas and designed high-concurrency RESTful APIs for mission-critical security features.',
-        'Integrated multi-AI (Antigravity, Claude, Gemini) workflows for rapid boilerplate generation and test-driven development.'
+        'Developed and maintained enterprise cybersecurity applications using Angular, C#, REST APIs, and MySQL.',
+        'Built real-time monitoring and management modules for Logs, Alerts, Incidents, and Ticket Management workflows.',
+        'Engineered a backend scheduler service in C# to automatically generate and deliver scheduled security and operational reports.',
+        'Designed and implemented a shift handover module allowing SOC analysts to track alerts, incidents, escalations, and handovers.',
+        'Developed the Threat Advisory Platform and executive Governance Reporting modules (CXO, weekly, and monthly reports).',
+        'Contributed to the SISA One unified platform by building reusable Angular component libraries and managing MySQL schema updates.'
       ]
     },
     {
       company: 'Infinity Learn Pvt. Ltd.',
       location: 'Bangalore, KA',
-      role: 'UI Developer',
+      role: 'Frontend Developer',
       period: 'Mar 2022 – Mar 2024',
       description: 'Built scalable Ed-Tech solutions focusing on interactive development environments and data-secure management systems.',
       achievements: [
-        'Developed a modular App Builder using Blockly and JavaScript with live CSS preview.',
-        'Architecture of a secure Drive Management system with granular RBAC and link-sharing compliance.',
-        'Scaled an enterprise reporting engine producing 1,000+ monthly reports with visualized analytics.',
-        'Collaborated with UX teams to deliver high-fidelity components for millions of users.'
+        'Developed an interactive drag-and-drop App Builder using JavaScript and Blockly with live CSS configuration.',
+        'Created reusable blocks enabling non-technical users to build and configure custom web applications visually.',
+        'Built secure file management capabilities featuring role-based access control and expiry-based link sharing.',
+        'Automated reporting workflows and certificate generation to reduce manual operational efforts.'
       ]
     }
   ];

@@ -1,0 +1,24 @@
+<section id="achievements" class="achievements-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Key <span class="gradient-text">Achievements</span></h2>
+      <p class="section-subtitle">Recognitions and awards earned throughout my professional journey.</p>
+    </div>
+
+    <div class="achievements-grid">
+      @for (award of awards; track award.title) {
+        <div class="achievement-card glass" [ngClass]="award.color">
+          <div class="card-icon">
+            <i class="fa-solid" [ngClass]="award.icon"></i>
+          </div>
+          <div class="card-content">
+            <span class="award-date">{{ award.date }}</span>
+            <h3>{{ award.title }}</h3>
+            <span class="organization">{{ award.organization }}</span>
+            <p>{{ award.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

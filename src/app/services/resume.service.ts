@@ -29,36 +29,35 @@ export interface ResumeData {
 })
 export class ResumeService {
   private baseData: ResumeData = {
-    summary: 'Full-Stack Developer with 3+ years of experience building enterprise security and ed-tech platforms. Proficient in Angular, React, and .NET C# for end-to-end feature delivery — from responsive UI components to REST API design and MySQL schema management. Currently a core contributor to ProACT (an MXDR security platform) and SISA One (a unified security, compliance & privacy platform) at SISA. Actively leverages AI tools including Claude, ChatGPT, Gemini, and GitHub Copilot to accelerate development and improve code quality. Experienced with cloud deployment on AWS and Azure DevOps.',
+    summary: 'Full-Stack Developer with 4+ years of experience building enterprise-grade applications in Cybersecurity and EdTech. Proficient in Angular, TypeScript, C#, REST APIs, and MySQL, with a strong track record of delivering security operations platforms, governance reporting systems, and threat advisory tools at scale. Adept at owning features end-to-end, driving performance improvements, and working closely with cross-functional teams to ship products that matter.',
     experience: [
       {
-        role: 'Full-Stack Developer (Associate Consultant)',
+        role: 'Software Engineer',
         company: 'SISA Forensic-driven Cybersecurity',
         location: 'Bangalore, KA',
         period: 'Jun 2024 – Present',
         bullets: [
-          'Contributing to ProACT, SISA\'s MXDR (Managed Detection & Response) security platform — building and enhancing features across frontend (Angular) and backend (.NET C#) for enterprise SOC operations.',
-          'Contributing to SISA One, a unified platform consolidating SISA\'s security, compliance, and privacy products.',
-          'Built the Shift Handover module providing shift-wise alerts and cluster-level incident metrics.',
-          'Designed and developed REST APIs and implemented business logic layers with Managed MySQL schema changes.',
-          'Delivered flexible weekly, monthly, and quarterly report builders with monitoring dashboards.',
-          'Developed the Threat Advisory module including device, customer, and advisory management features.',
-          'Enhanced core monitoring modules — Logs, Alerts, Incidents, and Ticket Management.',
-          'Leveraged Claude, ChatGPT, and GitHub Copilot daily to accelerate feature development and generate boilerplate.',
-          'Awarded the SPOT Award for technical ownership and the Culture Award for collaboration and consistent delivery.'
+          'Developed and maintained enterprise cybersecurity applications using Angular, C#, REST APIs, and MySQL.',
+          'Built real-time monitoring and management modules for Logs, Alerts, Incidents, and Ticket Management workflows.',
+          'Built and deployed a C# backend scheduler service to automatically generate and deliver scheduled security and operational reports directly to clients and SOC leads.',
+          'Developed shift handover functionality enabling analysts to manage alerts, incidents, escalations, and operational updates across shifts.',
+          'Developed the Threat Advisory Platform for creating, managing, and distributing security advisories to enterprise customers.',
+          'Designed and developed the Governance Reporting Platform supporting executive and customer reporting (CXO, Weekly, Monthly, and QMR reports).',
+          'Resolved code-level and package-level vulnerabilities by identifying security risks and upgrading dependencies to maintain a secure codebase.',
+          'Contributed to the consolidation of security, compliance, and privacy products into the SISA One unified platform using reusable Angular components and MySQL migrations.'
         ]
       },
       {
-        role: 'UI Developer',
+        role: 'Frontend Developer',
         company: 'Infinity Learn Pvt. Ltd.',
         location: 'Bangalore, KA',
         period: 'Mar 2022 – Mar 2024',
         bullets: [
-          'Developed an interactive App Builder using JavaScript, HTML/CSS, and Blockly, featuring live CSS configuration.',
-          'Built a secure Drive Management module with folder creation, uploads, role-based permissions, and expiry-based link sharing.',
-          'Developed a reporting engine generating 1,000+ monthly certificates and performance reports with visualized data summaries.',
-          'Designed and shipped scalable UI components through collaboration with multi-functional teams.',
-          'Used ChatGPT and Gemini to accelerate frontend debugging and generate reusable component patterns.'
+          'Developed an interactive drag-and-drop App Builder using JavaScript and Blockly with live CSS configuration.',
+          'Created reusable blocks enabling non-technical users to build and configure applications visually.',
+          'Improved maintainability by modularizing business logic and UI workflows.',
+          'Built secure Enterprise Drive Management System featuring role-based access control and secure link-sharing.',
+          'Automated reporting workflows and certificate generation to reduce manual operational efforts.'
         ]
       }
     ],
@@ -102,7 +101,7 @@ export class ResumeService {
       company: 'SISA Forensic-driven Cybersecurity',
       location: 'Bangalore, KA',
       period: 'Jun 2024 – Present',
-      role: 'Full-Stack Developer (Associate Consultant)',
+      role: 'Software Engineer',
       internalProjects: [
         {
           name: 'ProACT (Managed Detection & Response Platform)',
@@ -146,7 +145,7 @@ export class ResumeService {
       company: 'Infinity Learn Pvt. Ltd.',
       location: 'Bangalore, KA',
       period: 'Mar 2022 – Mar 2024',
-      role: 'UI Developer',
+      role: 'Frontend Developer',
       internalProjects: [
         {
           name: 'Interactive App Builder',

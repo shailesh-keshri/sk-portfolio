@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CoverLetterService } from '../../services/cover-letter.service';
 import { PdfService } from '../../services/pdf.service';
-import { JobTailorComponent } from '../job-tailor/job-tailor';
 
 @Component({
   selector: 'app-cover-letter-view',
   standalone: true,
-  imports: [CommonModule, RouterLink, JobTailorComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: './cover-letter-view.html',
   styleUrl: './cover-letter-view.css',
 })
