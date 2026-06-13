@@ -16,31 +16,44 @@ export class Projects {
       description: 'Enterprise Managed Detection & Response platform. Engineered critical modules for SOC automation and real-time incident handling.',
       tags: ['Angular', '.NET C#', 'MySQL', 'SOC Automation'],
       highlights: [
-        'Shift Handover: Built a real-time SOC handover module with automated shift metrics.',
-        'Logstash Manager: Developed a centralized manager for log data ingestion and processing.',
-        'Core Monitoring: Enhanced high-concurrency dashboards for Alerts and Incidents.'
+        'Threat Detection: Aggregates and correlates network security logs to identify anomalies in real-time.',
+        'Automated Triage: Uses intelligent playbooks to automatically classify and prioritize incoming alerts.',
+        'Incident Response: Enables SOC teams to quickly isolate compromised assets and mitigate active risks.',
+        '24/7 Monitoring: Provides high-performance dashboards for continuous visibility into the threat landscape.',
+        'Data Ingestion: Features a robust log management system to handle massive volumes of enterprise security data.'
       ]
     },
     {
-      title: 'Governance Portal',
-      type: 'Work | Compliance',
-      description: 'A dedicated portal for managing organizational governance, risk, and compliance (GRC) metrics.',
-      tags: ['Angular', '.NET C#', 'SISA One', 'Reporting Engine'],
+      title: 'Governance Platform',
+      type: 'Work | Compliance & Reporting',
+      description: 'A comprehensive organizational governance platform featuring dynamic layout-based reporting and data-driven insights.',
+      tags: ['Angular', '.NET C#', 'Data Visualization', 'Report Engine'],
       highlights: [
-        'Built automated report builders for Weekly/Monthly compliance reviews.',
-        'Integrated dynamic monitoring dashboards for Governance visibility.',
-        'Designed scalable UI components for high-fidelity compliance data.'
+        'Custom Report Builder: Engineered a dynamic generation engine for Weekly, Monthly, and Quarterly reports, allowing users to configure custom layouts (single, dual, or triple sections).',
+        'Insight Hub: Developed a sub-module to aggregate and store critical security data including KeyRisks, KeyHighlights, WhitelistTracker, ActionTracker, and Cyber Defence.',
+        'KPI Widgets: Built selectable widgets that utilize Insight Hub data to visualize metrics like Alerts, Events, Incidents, Usecases, and MTTD/MTTR graphs inside the reports.'
       ]
     },
     {
-      title: 'Threat Advisory Module',
+      title: 'Threat Advisory',
       type: 'Work | Threat Intel',
-      description: 'Real-time advisory system providing device, customer, and advisory management features.',
-      tags: ['Angular', 'REST APIs', 'Threat Intelligence', 'Real-time Hub'],
+      description: 'A proactive security communication system for designing and distributing threat advisories.',
+      tags: ['Angular', 'Email Automation', 'Template Engine', 'Security'],
       highlights: [
-        'Developed comprehensive Threat Advisory management features.',
-        'Integrated real-time threat intelligence feeds into the SISA One platform.',
-        'Ensured 360-degree visibility into emerging security landscapes.'
+        'Template Engine: Developed a dynamic templating system to create formatted security advisory templates.',
+        'Automated Distribution: Engineered an automated email pipeline to share critical advisories with registered customers.',
+        'Customer Management: Integrated with the customer registry to ensure targeted and reliable alert delivery.'
+      ]
+    },
+    {
+      title: 'Ticket Management',
+      type: 'Work | Workflow Automation',
+      description: 'An internal issue-tracking and workflow system built within ProACT, modeled after enterprise tools like Azure DevOps.',
+      tags: ['Angular', '.NET C#', 'Real-time', 'Collaboration'],
+      highlights: [
+        'Robust Tracking: Supported Tasks, Bugs, Issues, and Features with rich text descriptions and Root Cause Analysis (RCA).',
+        'Complex Workflows: Implemented parent-child ticket hierarchies and a complete activity audit log for state changes.',
+        'Collaboration: Developed interactive discussion threads featuring @mentions and automated email notifications.'
       ]
     },
     {

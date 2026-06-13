@@ -3,6 +3,10 @@
   background: var(--bg-alt);
 }
 
+.section-subtitle {
+  margin-bottom: 1rem;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -113,9 +117,13 @@
     background: none !important;
     page-break-inside: avoid;
   }
+
   .tag {
     border: 1px solid #ddd !important;
     color: black !important;
   }
-  .project-type { color: black !important; }
+
+  .project-type {
+    color: black !important;
+  }
 }
