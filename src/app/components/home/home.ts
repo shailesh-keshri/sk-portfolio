@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Hero } from '../hero/hero';
+import { IntroductionComponent } from '../introduction/introduction.component';
 import { About } from '../about/about';
 import { Skills } from '../skills/skills';
 import { Experience } from '../experience/experience';
 import { Projects } from '../projects/projects';
 import { Achievements } from '../achievements/achievements';
+import { ContactComponent } from '../contact/contact.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Hero, About, Skills, Experience, Projects, Achievements],
+  imports: [CommonModule, IntroductionComponent, About, Skills, Experience, Projects, Achievements, ContactComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

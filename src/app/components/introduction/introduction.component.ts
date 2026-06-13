@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-introduction',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './hero.html',
-  styleUrl: './hero.css',
+  templateUrl: './introduction.component.html',
+  styleUrl: './introduction.component.css',
 })
-export class Hero {}
+export class IntroductionComponent {}
