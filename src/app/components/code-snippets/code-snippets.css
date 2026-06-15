@@ -1,0 +1,184 @@
+.snippets-section {
+  padding: var(--space-lg) 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: left;
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* Terminal Window */
+.terminal-window {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px var(--shadow-lg);
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light Theme overrides for terminal border so it pops out */
+:root.light-theme .terminal-window {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  left: 20px;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.control.close { background: #ff5f56; }
+.control.minimize { background: #ffbd2e; }
+.control.maximize { background: #27c93f; }
+
+.terminal-title {
+  width: 100%;
+  text-align: center;
+  color: #888;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.terminal-body {
+  display: flex;
+  height: 400px;
+}
+
+.terminal-sidebar {
+  width: 250px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px 0;
+}
+
+.sidebar-title {
+  padding: 0 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.file-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.file-item.active {
+  background: rgba(0, 242, 255, 0.1);
+  color: #fff;
+  border-left: 3px solid var(--primary);
+}
+
+.terminal-editor {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e; /* VS Code dark background ALWAYS, even in light theme */
+}
+
+.editor-tabs {
+  display: flex;
+  background: #252526;
+}
+
+.tab.active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #1e1e1e;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  border-top: 2px solid var(--primary);
+}
+
+.code-container {
+  padding: 20px;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+pre {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #9cdcfe; /* Light blue code color for basic highlighting */
+}
+
+pre code {
+  white-space: pre;
+}
+
+@media (max-width: 768px) {
+  .terminal-body {
+    flex-direction: column;
+    height: auto;
+  }
+  .terminal-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 8px;
+  }
+  .file-list {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .file-item {
+    padding: 8px 12px;
+    border-left: none;
+    white-space: nowrap;
+  }
+  .file-item.active {
+    border-left: none;
+    border-bottom: 2px solid var(--primary);
+  }
+}

@@ -1,0 +1,55 @@
+<section id="snippets" class="snippets-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Code <span class="gradient-text">Snippets</span></h2>
+      <p class="section-subtitle">A collection of elegant, reusable utility functions and components.</p>
+    </div>
+    
+    <div class="terminal-window glass">
+      <!-- Mac Window Controls -->
+      <div class="terminal-header">
+        <div class="window-controls">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control maximize"></span>
+        </div>
+        <div class="terminal-title">~/projects/portfolio/snippets</div>
+      </div>
+      
+      <div class="terminal-body">
+        <!-- Sidebar -->
+        <div class="terminal-sidebar">
+          <div class="sidebar-title">EXPLORER</div>
+          <ul class="file-list">
+            @for (snippet of snippets; track snippet.id) {
+              <li 
+                class="file-item" 
+                [class.active]="snippet.id === activeSnippetId"
+                (click)="setActiveSnippet(snippet.id)">
+                <i [class]="snippet.icon" [style.color]="snippet.color"></i>
+                <span>{{ snippet.name }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+        
+        <!-- Code Editor Area -->
+        <div class="terminal-editor">
+          @for (snippet of snippets; track snippet.id) {
+            @if (snippet.id === activeSnippetId) {
+              <div class="editor-tabs">
+                <div class="tab active">
+                  <i [class]="snippet.icon" [style.color]="snippet.color"></i>
+                  <span>{{ snippet.name }}</span>
+                </div>
+              </div>
+              <div class="code-container">
+                <pre><code>{{ snippet.code }}</code></pre>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

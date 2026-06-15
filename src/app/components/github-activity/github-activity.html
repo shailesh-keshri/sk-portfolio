@@ -1,0 +1,54 @@
+<section id="github" class="github-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Open <span class="gradient-text">Source</span></h2>
+      <p class="section-subtitle">A snapshot of my recent coding activity and open-source contributions.</p>
+    </div>
+    
+    <div class="github-bento">
+      <!-- Stats Cards -->
+      <div class="stats-column">
+        <div class="bento-card glass stat-card reveal reveal-delay-1">
+          <div class="stat-icon"><i class="fa-brands fa-github"></i></div>
+          <div class="stat-info">
+            <span class="stat-number">1,204</span>
+            <span class="stat-label">Contributions this year</span>
+          </div>
+        </div>
+        
+        <div class="bento-card glass stat-card reveal reveal-delay-2">
+          <div class="stat-icon"><i class="fa-solid fa-code-branch"></i></div>
+          <div class="stat-info">
+            <span class="stat-number">14</span>
+            <span class="stat-label">Active Repositories</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Heatmap Card -->
+      <div class="bento-card glass heatmap-card reveal reveal-delay-3">
+        <div class="card-header">
+          <h3>Contribution Heatmap</h3>
+          <span class="live-badge"><span class="pulse"></span> Live Data</span>
+        </div>
+        
+        <div class="heatmap-container">
+          <div class="heatmap-grid">
+            @for (day of contributionDays; track $index) {
+              <div class="heatmap-square" [ngClass]="getIntensityClass(day)"></div>
+            }
+          </div>
+          <div class="heatmap-legend">
+            <span>Less</span>
+            <div class="legend-square intensity-0"></div>
+            <div class="legend-square intensity-1"></div>
+            <div class="legend-square intensity-2"></div>
+            <div class="legend-square intensity-3"></div>
+            <div class="legend-square intensity-4"></div>
+            <span>More</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

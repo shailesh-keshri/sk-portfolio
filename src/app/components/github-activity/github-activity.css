@@ -1,0 +1,222 @@
+.github-section {
+  padding: var(--space-lg) 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: left;
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.github-bento {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-md);
+}
+
+.stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.bento-card {
+  border-radius: 20px;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bento-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px var(--shadow-lg);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  height: 100%;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--surface-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.heatmap-card {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.card-header h3 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--primary);
+  background: var(--primary-glow);
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid var(--primary);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.heatmap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 4px;
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+/* Chrome scrollbar hiding for the grid */
+.heatmap-grid::-webkit-scrollbar {
+  height: 4px;
+}
+.heatmap-grid::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 4px;
+}
+
+.heatmap-square, .legend-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.heatmap-square:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 10px var(--primary);
+  z-index: 10;
+  position: relative;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* Intensity Colors using Theme CSS variables */
+/* Fallbacks defined in case CSS variable is slightly off, but using primary works beautifully */
+:root {
+  --gh-level-0: rgba(128, 128, 128, 0.1);
+  --gh-level-1: rgba(0, 102, 255, 0.3);
+  --gh-level-2: rgba(0, 102, 255, 0.5);
+  --gh-level-3: rgba(0, 102, 255, 0.8);
+  --gh-level-4: rgba(0, 102, 255, 1);
+}
+
+:root:not(.light-theme) {
+  --gh-level-0: rgba(255, 255, 255, 0.05);
+  --gh-level-1: rgba(0, 242, 255, 0.3);
+  --gh-level-2: rgba(0, 242, 255, 0.5);
+  --gh-level-3: rgba(0, 242, 255, 0.8);
+  --gh-level-4: rgba(0, 242, 255, 1);
+}
+
+.intensity-0 { background: var(--gh-level-0); }
+.intensity-1 { background: var(--gh-level-1); }
+.intensity-2 { background: var(--gh-level-2); }
+.intensity-3 { background: var(--gh-level-3); }
+.intensity-4 { background: var(--gh-level-4); }
+
+@media (max-width: 1200px) {
+  .github-bento {
+    grid-template-columns: 1fr;
+  }
+  .stats-column {
+    flex-direction: row;
+  }
+  .stat-card {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-column {
+    flex-direction: column;
+  }
+}

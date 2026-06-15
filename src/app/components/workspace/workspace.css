@@ -1,0 +1,139 @@
+.workspace-section {
+  padding: var(--space-lg) 0;
+  background: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: left;
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 600px;
+  text-align: left;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.bento-card {
+  padding: 24px;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.bento-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px var(--shadow-lg);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--surface-border);
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.bento-card:hover .icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.card-header h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.workspace-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface-border);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.workspace-item:hover {
+  background: transparent;
+  border-color: var(--primary);
+  transform: translateX(5px);
+}
+
+.item-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-name {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.item-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 992px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .workspace-section {
+    padding: var(--space-md) 0;
+  }
+
+  .bento-card {
+    border: 1px solid #ddd !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+}

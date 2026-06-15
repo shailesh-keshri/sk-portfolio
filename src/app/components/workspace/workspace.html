@@ -1,0 +1,34 @@
+<section id="workspace" class="workspace-section reveal">
+  <div class="grid-bg"></div>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">My <span class="gradient-text">Workspace</span></h2>
+      <p class="section-subtitle">A glimpse into the tools, hardware, and technologies that power my daily workflow and continuous learning.</p>
+    </div>
+    
+    <div class="workspace-grid">
+      @for (category of workspaceItems; track category.category) {
+        <div class="bento-card glass reveal reveal-delay-{{ $index + 1 }}">
+          <div class="card-header">
+            <div class="icon-wrapper" [style.color]="category.color">
+              <i [class]="category.icon"></i>
+            </div>
+            <h3>{{ category.category }}</h3>
+          </div>
+          
+          <div class="item-list">
+            @for (item of category.items; track item.name) {
+              <div class="workspace-item">
+                <div class="item-bullet" [style.background]="category.color"></div>
+                <div class="item-details">
+                  <span class="item-name">{{ item.name }}</span>
+                  <span class="item-desc">{{ item.desc }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

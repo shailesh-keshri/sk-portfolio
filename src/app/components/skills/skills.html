@@ -3,26 +3,58 @@
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Technical <span class="gradient-text">Expertise</span></h2>
-      <p class="section-subtitle">Proficient in modern web technologies and AI-augmented development workflows.</p>
+      <p class="section-subtitle">Engineering scalable, high-performance applications—from pixel-perfect frontend interfaces to robust backend architectures.</p>
     </div>
     
-    <div class="skills-grid">
-      @for (category of skillCategories; track category.name) {
-        <div class="skill-card glass reveal reveal-delay-{{ $index + 1 }}" [class.highlight-card]="category.highlight">
+    <!-- Core Competencies with Progress Bars -->
+    <div class="core-skills-grid">
+      @for (category of coreSkills; track category.name) {
+        <div class="bento-card glass reveal reveal-delay-{{ $index + 1 }}">
           <div class="card-header">
-            <span class="icon">{{ category.icon }}</span>
+            <div class="icon-wrapper" [style.color]="category.color">
+              <i [class]="category.icon"></i>
+            </div>
             <h3>{{ category.name }}</h3>
           </div>
-          <ul class="skill-list">
-            @for (skill of category.skills; track skill) {
-              <li class="skill-item">
-                <span class="dot"></span>
-                {{ skill }}
-              </li>
+          
+          <div class="progress-grid">
+            @for (skill of category.skills; track skill.name) {
+              <div class="progress-item">
+                <div class="progress-info">
+                  <div class="skill-name">
+                    <i [class]="skill.icon" [style.color]="skill.color"></i>
+                    <span>{{ skill.name }}</span>
+                  </div>
+                  <span class="progress-percentage">{{ skill.proficiency }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" [style.width]="skill.proficiency + '%'" [style.background]="skill.color"></div>
+                </div>
+              </div>
             }
-          </ul>
+          </div>
         </div>
       }
+    </div>
+
+    <!-- Frameworks and Tools with Chips -->
+    <div class="tools-skills-grid reveal reveal-delay-3">
+      <div class="bento-card glass full-width">
+        <div class="card-header">
+          <div class="icon-wrapper" [style.color]="toolCategory.color">
+            <i [class]="toolCategory.icon"></i>
+          </div>
+          <h3>{{ toolCategory.name }}</h3>
+        </div>
+        <div class="chip-grid">
+          @for (skill of toolCategory.skills; track skill.name) {
+            <div class="skill-chip">
+              <i [class]="skill.icon" [style.color]="skill.color"></i>
+              <span>{{ skill.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
