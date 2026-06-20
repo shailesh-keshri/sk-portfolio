@@ -11,7 +11,7 @@
       @for (category of coreSkills; track category.name) {
         <div class="bento-card glass reveal reveal-delay-{{ $index + 1 }}">
           <div class="card-header">
-            <div class="icon-wrapper" [style.color]="category.color">
+            <div class="icon-wrapper" >
               <i [class]="category.icon"></i>
             </div>
             <h3>{{ category.name }}</h3>
@@ -22,13 +22,13 @@
               <div class="progress-item">
                 <div class="progress-info">
                   <div class="skill-name">
-                    <i [class]="skill.icon" [style.color]="skill.color"></i>
+                    <i [class]="skill.icon" ></i>
                     <span>{{ skill.name }}</span>
                   </div>
                   <span class="progress-percentage">{{ skill.proficiency }}%</span>
                 </div>
                 <div class="progress-bar-bg">
-                  <div class="progress-bar-fill" [style.width]="skill.proficiency + '%'" [style.background]="skill.color"></div>
+                  <div class="progress-bar-fill" [style.width]="skill.proficiency + '%'"></div>
                 </div>
               </div>
             }
@@ -41,7 +41,7 @@
     <div class="tools-skills-grid reveal reveal-delay-3">
       <div class="bento-card glass full-width">
         <div class="card-header">
-          <div class="icon-wrapper" [style.color]="toolCategory.color">
+          <div class="icon-wrapper" >
             <i [class]="toolCategory.icon"></i>
           </div>
           <h3>{{ toolCategory.name }}</h3>
@@ -49,7 +49,7 @@
         <div class="chip-grid">
           @for (skill of toolCategory.skills; track skill.name) {
             <div class="skill-chip">
-              <i [class]="skill.icon" [style.color]="skill.color"></i>
+              <i [class]="skill.icon" ></i>
               <span>{{ skill.name }}</span>
             </div>
           }

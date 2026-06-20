@@ -38,21 +38,25 @@
 }
 
 .achievement-card.gold:hover {
+  background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.1), transparent 70%), var(--surface);
   border-color: #ffd700;
   box-shadow: 0 15px 35px -10px rgba(255, 215, 0, 0.15);
 }
 
 .achievement-card.cyan:hover {
+  background: radial-gradient(circle at top left, rgba(0, 242, 255, 0.1), transparent 70%), var(--surface);
   border-color: #00f2ff;
   box-shadow: 0 15px 35px -10px rgba(0, 242, 255, 0.15);
 }
 
 .achievement-card.purple:hover {
+  background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.1), transparent 70%), var(--surface);
   border-color: #a855f7;
   box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.15);
 }
 
 .achievement-card.indigo:hover {
+  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.1), transparent 70%), var(--surface);
   border-color: #6366f1;
   box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.15);
 }

@@ -26,7 +26,7 @@
                 class="file-item" 
                 [class.active]="snippet.id === activeSnippetId"
                 (click)="setActiveSnippet(snippet.id)">
-                <i [class]="snippet.icon" [style.color]="snippet.color"></i>
+                <i [class]="snippet.icon" ></i>
                 <span>{{ snippet.name }}</span>
               </li>
             }
@@ -39,7 +39,7 @@
             @if (snippet.id === activeSnippetId) {
               <div class="editor-tabs">
                 <div class="tab active">
-                  <i [class]="snippet.icon" [style.color]="snippet.color"></i>
+                  <i [class]="snippet.icon" ></i>
                   <span>{{ snippet.name }}</span>
                 </div>
               </div>

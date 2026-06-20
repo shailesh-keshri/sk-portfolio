@@ -9,6 +9,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './experience.css',
 })
 export class Experience {
+  expandedIndex: number | null = null;
+
+  toggleExpand(index: number) {
+    if (this.expandedIndex === index) {
+      this.expandedIndex = null;
+    } else {
+      this.expandedIndex = index;
+    }
+  }
+
   experiences = [
     {
       company: 'SISA Forensic-driven Cybersecurity',
@@ -16,6 +26,7 @@ export class Experience {
       role: 'Software Engineer',
       period: 'Jun 2024 – Present',
       description: 'Develop and maintain enterprise-grade Managed Detection & Response (MXDR) and compliance platforms.',
+      skills: ['Angular', 'C#', 'REST APIs', 'MySQL'],
       achievements: [
         'Developed and maintained enterprise cybersecurity applications using Angular, C#, REST APIs, and MySQL.',
         'Built real-time monitoring and management modules for Logs, Alerts, Incidents, and Ticket Management workflows.',
@@ -31,6 +42,7 @@ export class Experience {
       role: 'Frontend Developer',
       period: 'Mar 2022 – Mar 2024',
       description: 'Built scalable Ed-Tech solutions focusing on interactive development environments and data-secure management systems.',
+      skills: ['JavaScript', 'Blockly', 'CSS', 'Web Security'],
       achievements: [
         'Developed an interactive drag-and-drop App Builder using JavaScript and Blockly with live CSS configuration.',
         'Created reusable blocks enabling non-technical users to build and configure custom web applications visually.',

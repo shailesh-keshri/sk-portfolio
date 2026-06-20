@@ -6,20 +6,13 @@
 }
 
 .section-header {
-  text-align: left;
+  text-align: center;
   margin-bottom: var(--space-md);
 }
 
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
-}
 
-.section-subtitle {
-  color: var(--text-muted);
-  max-width: 600px;
-  text-align: left;
-}
+
+
 
 /* Grids */
 .core-skills-grid {
@@ -109,13 +102,19 @@
   font-weight: 500;
 }
 
+.skill-name span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
 .skill-name i {
   font-size: 1.2rem;
 }
 
 .progress-percentage {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -130,6 +129,7 @@
 .progress-bar-fill {
   height: 100%;
   border-radius: 10px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -173,9 +173,7 @@
 }
 
 @media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
+  
 }
 
 @media print {

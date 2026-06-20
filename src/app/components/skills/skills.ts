@@ -15,10 +15,10 @@ export class Skills {
       icon: 'fa-solid fa-layer-group',
       color: 'var(--primary)',
       skills: [
-        { name: 'TypeScript', icon: 'fa-brands fa-js', color: '#3178C6', proficiency: 90 },
-        { name: 'JavaScript', icon: 'fa-brands fa-js', color: '#F7DF1E', proficiency: 95 },
-        { name: 'HTML5', icon: 'fa-brands fa-html5', color: '#E34F26', proficiency: 95 },
-        { name: 'CSS3', icon: 'fa-brands fa-css3-alt', color: '#1572b6', proficiency: 90 }
+        { name: 'Angular', icon: 'fa-brands fa-angular', color: '#DD0031', proficiency: 95 },
+        { name: 'React', icon: 'fa-brands fa-react', color: '#61DAFB', proficiency: 90 },
+        { name: 'TypeScript/JavaScript', icon: 'fa-brands fa-js', color: '#F7DF1E', proficiency: 95 },
+        { name: 'HTML/CSS', icon: 'fa-brands fa-html5', color: '#E34F26', proficiency: 95 }
       ]
     },
     {
@@ -39,8 +39,6 @@ export class Skills {
     icon: 'fa-solid fa-toolbox',
     color: '#ec4899',
     skills: [
-      { name: 'Angular', icon: 'fa-brands fa-angular', color: '#DD0031' },
-      { name: 'React', icon: 'fa-brands fa-react', color: '#61DAFB' },
       { name: 'Ionic', icon: 'fa-solid fa-mobile-screen', color: '#3880ff' },
       { name: 'Bootstrap', icon: 'fa-brands fa-bootstrap', color: '#7952b3' },
       { name: 'AWS', icon: 'fa-brands fa-aws', color: '#FF9900' },

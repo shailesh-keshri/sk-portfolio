@@ -20,8 +20,14 @@
   --text: rgba(255, 255, 255, 0.95);
   --text-muted: rgba(255, 255, 255, 0.6);
   --text-dim: rgba(255, 255, 255, 0.35);
-  
-  --grid-line-color: rgba(0, 242, 255, 0.05);
+
+  /* Icon Theme */
+  --icon-color: #6366f1;
+  --icon-bg: rgba(99, 102, 241, 0.15);
+  --icon-border: rgba(99, 102, 241, 0.25);
+
+  --grid-line-color: rgba(99, 102, 241, 0.15);
+  --section-glow-color: rgba(60, 60, 70, 0.85);
   --hero-bg-image: url('assets/images/dark-hero-bg.png');
 
   /* Spacing */
@@ -46,15 +52,21 @@
   --bg-alt: #e8eef3;
   --surface: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(220, 238, 255, 0.5) 100%);
   --surface-border: rgba(0, 102, 255, 0.15);
-  --primary: #0066ff; /* Deep Blue for light mode readability */
+  --primary: #0066ff;
+  /* Deep Blue for light mode readability */
   --primary-glow: rgba(0, 102, 255, 0.3);
-  --secondary: #8a2be2; /* BlueViolet */
+  --secondary: #8a2be2;
+  /* BlueViolet */
   --secondary-glow: rgba(138, 43, 226, 0.3);
   --text: #111111;
   --text-muted: #444444;
   --text-dim: #888888;
   --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
-  --grid-line-color: rgba(0, 102, 255, 0.1);
+  --icon-color: #4f46e5;
+  --icon-bg: rgba(79, 70, 229, 0.15);
+  --icon-border: rgba(79, 70, 229, 0.25);
+  --grid-line-color: rgba(79, 70, 229, 0.15);
+  --section-glow-color: rgba(220, 225, 230, 0.9);
   --hero-bg-image: url('assets/images/light-hero-bg.png');
 }
 
@@ -64,19 +76,14 @@
   box-sizing: border-box;
 }
 
-/* Global Alternating Grid Background */
+/* Global Ambient Section Background */
 .grid-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    linear-gradient(var(--grid-line-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
+  background: radial-gradient(ellipse at center, var(--section-glow-color) 0%, transparent 80%);
   z-index: -1;
   pointer-events: none;
 }
@@ -89,7 +96,7 @@ html {
 body {
   background-color: var(--bg-color);
   color: var(--text);
-  font-family: 'Avenir', 'Avenir Next', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-main);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -224,4 +231,65 @@ button {
 section {
   padding: 6rem 0;
   position: relative;
+}
+
+.section-header,
+.section-header-left {
+  text-align: center;
+  width: 100%;
+}
+
+.section-title {
+  text-align: center;
+  font-family: var(--font-main);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-family: var(--font-main);
+  font-size: 1.125rem;
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+p {
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Global Icon Uniformity - Achievement Style */
+.icon-wrapper,
+.card-icon {
+  background: var(--icon-bg) !important;
+  border: 1px solid var(--icon-border) !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0;
+}
+
+/* Apply the theme color ONLY to the main structural icons */
+.icon-wrapper i,
+.card-icon i {
+  color: var(--icon-color) !important;
+}
+
+/* Ensure small inline text icons remain neutral to avoid visual clutter */
+.skill-name i,
+.skill-chip i,
+.contact-item i,
+.footer-nav a i {
+  color: var(--text-muted);
 }

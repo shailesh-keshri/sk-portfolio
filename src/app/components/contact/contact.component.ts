@@ -20,6 +20,7 @@ export class ContactComponent {
     name: '',
     email: '',
     subject: '',
+    purpose: '',
     message: ''
   };
 
@@ -40,6 +41,7 @@ export class ContactComponent {
         from_name: this.formData.name,
         reply_to: this.formData.email,
         subject: this.formData.subject,
+        purpose: this.formData.purpose,
         message: this.formData.message
       }
     };

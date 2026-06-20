@@ -6,31 +6,45 @@
     </div>
     
     <div class="timeline">
-      @for (exp of experiences; track exp.company) {
-        <div class="timeline-item">
+      @for (exp of experiences; track exp.company; let i = $index) {
+        <div class="timeline-item" [ngClass]="{'left-side': i % 2 === 0, 'right-side': i % 2 !== 0}">
           <div class="timeline-dot"></div>
-          <div class="timeline-content glass">
-            <div class="exp-header">
-              <div class="exp-title">
-                <h3>{{ exp.role }}</h3>
-                <span class="company">{{ exp.company }}</span>
-              </div>
-              <div class="exp-meta">
-                <span class="period">{{ exp.period }}</span>
-                <span class="location">{{ exp.location }}</span>
-              </div>
+          <div class="timeline-content glass" [class.expanded]="expandedIndex === i" (click)="toggleExpand(i)">
+            <div class="exp-period">
+              <i class="fa-solid fa-briefcase"></i>
+              <span>{{ exp.period }}</span>
             </div>
+            
+            <h3 class="company-name">{{ exp.company }}</h3>
+            <div class="exp-role">{{ exp.role }}</div>
             
             <p class="exp-description">{{ exp.description }}</p>
             
-            <ul class="achievement-list">
-              @for (item of exp.achievements; track item) {
-                <li>
-                  <span class="marker">></span>
-                  {{ item }}
-                </li>
+            <div class="tech-chips">
+              @for (skill of exp.skills; track skill) {
+                <span class="chip">{{ skill }}</span>
               }
-            </ul>
+            </div>
+            
+            @if (expandedIndex === i) {
+              <div class="expanded-content">
+                <div class="expanded-divider"></div>
+                <h4 class="expanded-title">Key Contributions</h4>
+                <ul class="achievement-list">
+                  @for (item of exp.achievements; track item) {
+                    <li>
+                      <span class="marker">></span>
+                      {{ item }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+            
+            <div class="expand-hint">
+              <i class="fa-solid" [ngClass]="expandedIndex === i ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+              <span>{{ expandedIndex === i ? 'Show less' : 'View achievements' }}</span>
+            </div>
           </div>
         </div>
       }

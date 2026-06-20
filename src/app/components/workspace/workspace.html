@@ -10,7 +10,7 @@
       @for (category of workspaceItems; track category.category) {
         <div class="bento-card glass reveal reveal-delay-{{ $index + 1 }}">
           <div class="card-header">
-            <div class="icon-wrapper" [style.color]="category.color">
+            <div class="icon-wrapper" >
               <i [class]="category.icon"></i>
             </div>
             <h3>{{ category.category }}</h3>

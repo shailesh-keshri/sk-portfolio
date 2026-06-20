@@ -1,31 +1,20 @@
 <section id="contact" class="contact-section reveal">
-  <div class="grid-bg"></div>
-  <div class="container contact-grid">
-    <div class="contact-info glass">
-      <div class="section-header-left">
-        <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
-        <p class="section-subtitle">Open for new opportunities, freelance work, and collaborations.</p>
+  <div class="container contact-single">
+    <div class="section-header">
+      <h2 class="section-title">Let's Build <span class="gradient-text">Something</span></h2>
+      <p class="section-subtitle">Open for new opportunities, freelance work, and collaborations.</p>
+    </div>
+    
+    <div class="contact-info-row">
+      <div class="contact-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:shailesh0398@gmail.com">shailesh0398@gmail.com</a>
       </div>
-      
-      <div class="contact-details">
-        <div class="contact-item">
-          <i class="fa-solid fa-envelope"></i>
-          <div>
-            <h4>Email</h4>
-            <a href="mailto:shailesh0398@gmail.com">shailesh0398@gmail.com</a>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <i class="fa-solid fa-location-dot"></i>
-          <div>
-            <h4>Location</h4>
-            <p>Bengaluru, India</p>
-          </div>
-        </div>
+      <div class="contact-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Bengaluru, India</span>
       </div>
-      
-      <div class="social-links-large">
+      <div class="social-links-row">
         <a href="https://linkedin.com/in/shailesh-keshri-463620177" target="_blank" class="glass"><i class="fa-brands fa-linkedin-in"></i></a>
         <a href="https://github.com/shailesh-keshri" target="_blank" class="glass"><i class="fa-brands fa-github"></i></a>
       </div>
@@ -35,24 +24,39 @@
       <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
         <h3>Send a Message</h3>
         
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" [(ngModel)]="formData.name" required placeholder="Your Name">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="formData.name" required placeholder="Your Name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="formData.email" required placeholder="your.email@example.com">
+          </div>
         </div>
         
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" [(ngModel)]="formData.email" required placeholder="your.email@example.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" [(ngModel)]="formData.subject" required placeholder="What is this regarding?">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" [(ngModel)]="formData.subject" required placeholder="What is this regarding?">
+          </div>
+          
+          <div class="form-group">
+            <label for="purpose">Purpose</label>
+            <select id="purpose" name="purpose" [(ngModel)]="formData.purpose" required>
+              <option value="" disabled selected>Select purpose</option>
+              <option value="Freelance">Freelance Project</option>
+              <option value="Job">Job Opportunity</option>
+              <option value="Collaboration">Collaboration</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
         
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" [(ngModel)]="formData.message" rows="5" required placeholder="How can we work together?"></textarea>
+          <textarea id="message" name="message" [(ngModel)]="formData.message" rows="4" required placeholder="How can we work together?"></textarea>
         </div>
         
         <button type="submit" class="btn-primary btn-block" [disabled]="contactForm.invalid || status === 'submitting'">

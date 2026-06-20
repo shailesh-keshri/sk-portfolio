@@ -6,22 +6,16 @@
     </div>
     
     <div class="projects-grid">
-      @for (project of projects; track project.title) {
-        <div class="project-card glass">
+      @for (project of projects; track project.title; let i = $index) {
+        <div class="project-card glass" [ngClass]="project.hoverClass" [class.expanded]="expandedIndex === i" (click)="toggleExpand(i)">
           <div class="project-header">
-            <span class="project-type">{{ project.type }}</span>
-            <h3 class="project-title">{{ project.title }}</h3>
-          </div>
-          
-          <p class="project-description">{{ project.description }}</p>
-          
-          <div class="project-highlights">
-            <h4>Key Contributions:</h4>
-            <ul>
-              @for (high of project.highlights; track high) {
-                <li>{{ high }}</li>
-              }
-            </ul>
+            <div class="card-icon-box">
+              <i class="fa-solid" [ngClass]="project.icon"></i>
+            </div>
+            <div class="title-wrapper">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <span class="project-type">{{ project.type }}</span>
+            </div>
           </div>
           
           <div class="project-tags">
@@ -29,6 +23,21 @@
               <span class="tag">{{ tag }}</span>
             }
           </div>
+          
+          @if (expandedIndex === i) {
+            <div class="expanded-content">
+              <p class="project-description">{{ project.description }}</p>
+              
+              <div class="project-highlights">
+                <h4>Key Contributions:</h4>
+                <ul>
+                  @for (high of project.highlights; track high) {
+                    <li>{{ high }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
         </div>
       }
     </div>

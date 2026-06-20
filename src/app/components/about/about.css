@@ -1,47 +1,76 @@
 .about-section {
   padding: var(--space-xl) 0;
-  background: var(--bg-color);
+  background: var(--bg-alt);
 }
 
-.about-grid {
+.about-grid-new {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
-  align-items: center;
+  align-items: stretch; /* Stretch image wrapper to match content height */
 }
 
-.about-content p {
+.about-image-wrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100%; /* Fill the grid column */
+}
+
+.about-image {
+  width: 100%;
+  height: 100%; /* Stretch to fill wrapper */
+  object-fit: cover;
+  display: block;
+}
+
+.about-content-new .section-header-left {
+  margin-top: -30px; /* Moved further up */
+}
+
+.about-text {
+  margin-top: 0;
+}
+
+.about-text p {
   color: var(--text-muted);
   margin-bottom: var(--space-sm);
   font-size: 1.125rem;
 }
 
-.about-content strong {
+.about-text strong {
   color: var(--text);
   font-weight: 600;
 }
 
-.about-stats {
+.about-stats-new {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .stat-card {
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md); /* Reduced top/bottom padding */
   text-align: center;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.stat-card:nth-child(3) {
-  grid-column: span 2;
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .stat-num {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 800;
   color: var(--primary);
   display: block;
@@ -55,13 +84,8 @@
 }
 
 @media (max-width: 900px) {
-  .about-grid {
+  .about-grid-new {
     grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .about-stats {
-    max-width: 500px;
-    margin: 0 auto;
   }
 }
 
