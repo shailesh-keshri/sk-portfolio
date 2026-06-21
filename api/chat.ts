@@ -1,46 +1,45 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Prevent Vercel from timing out the function before Gemini finishes (Hobby max is 60s)
-export const maxDuration = 60;
+// Switch to Edge Runtime. This completely bypasses Node.js and fixes Vercel FUNCTION_INVOCATION_FAILED.
+export const config = {
+  runtime: 'edge',
+};
 
-// Force Vercel to deploy this function in the US (Washington D.C.). 
-// Gemini API is blocked in some European Vercel datacenters and will throw a 500 error!
-export const preferredRegion = 'iad1';
-
-export default async function handler(req: any, res: any) {
-  // CORS Headers: Locked down to prevent abuse
-  const origin = req.headers.origin || '';
-  // Only allow requests from localhost (dev) or vercel.app (production)
-  if (origin.includes('localhost') || origin.endsWith('.vercel.app')) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    // If you ever buy a custom domain (e.g. shaileshkeshri.com), add it to the if-statement above!
-    res.setHeader('Access-Control-Allow-Origin', 'https://your-production-url.vercel.app');
-  }
-
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+export default async function handler(req: Request) {
+  // CORS Headers
+  const origin = req.headers.get('origin') || '';
+  const allowedOrigin = (origin.includes('localhost') || origin.endsWith('.vercel.app')) 
+    ? origin 
+    : 'https://your-production-url.vercel.app';
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+        'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    });
   }
 
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method Not Allowed' });
-    return;
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 405 });
   }
 
-  const apiKey = process.env['GEMINI_API_KEY'];
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    console.error('GEMINI_API_KEY environment variable is missing.');
-    res.status(500).json({ error: 'GEMINI_API_KEY environment variable is missing. Please add it to your environment variables.' });
-    return;
+    return new Response(JSON.stringify({ error: 'GEMINI_API_KEY environment variable is missing. Please add it to your environment variables.' }), { status: 500 });
   }
 
   try {
-    const { message, history } = req.body;
+    let bodyText = await req.text();
+    let body: any = {};
+    if (bodyText) {
+      try { body = JSON.parse(bodyText); } catch (e) { }
+    }
+    const { message, history } = body;
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
@@ -106,25 +105,44 @@ Keep answers to 1-3 short paragraphs maximum. Do not hallucinate skills he does 
 
     const result = await chat.sendMessageStream(message);
 
-    // Set headers for Server-Sent Events (SSE)
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
+    // Create Edge Stream for SSE
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ text: chunkText })}\n\n`));
+          }
+          controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+          controller.close();
+        } catch (err) {
+          console.error("Stream Error:", err);
+          controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ text: "\n\n**[Connection Error: AI interrupted]**" })}\n\n`));
+          controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
+          controller.close();
+        }
+      }
+    });
 
-    for await (const chunk of result.stream) {
-      const chunkText = chunk.text();
-      // Send chunk in SSE format
-      res.write(`data: ${JSON.stringify({ text: chunkText })}\n\n`);
-      // Vercel / Express native flush if supported
-      if (res.flush) res.flush();
-    }
-
-    // Signal end of stream
-    res.write('data: [DONE]\n\n');
-    res.end();
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    });
 
   } catch (error: any) {
-    console.error('Error generating AI response:', error);
-    res.status(500).json({ error: `Backend Error: ${error.message || 'Unknown error'}` });
+    console.error('Fatal Edge Runtime Error:', error);
+    return new Response(JSON.stringify({ error: `Backend Error: ${error.message || 'Unknown error'}` }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    });
   }
 }
