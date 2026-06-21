@@ -1,0 +1,52 @@
+<div class="chatbot-container" [class.open]="isOpen">
+  <!-- Chat Toggle Button -->
+  <button class="chat-toggle-btn glass" (click)="toggleChat()">
+    @if (!isOpen) {
+      <i class="fa-solid fa-robot"></i>
+    } @else {
+      <i class="fa-solid fa-times"></i>
+    }
+  </button>
+
+  <!-- Chat Window -->
+  @if (isOpen) {
+    <div class="chat-window glass-panel">
+      <div class="chat-header">
+        <div class="header-info">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>Ask Shailesh AI</span>
+        </div>
+      </div>
+
+      <div class="chat-body" #scrollMe>
+        @for (msg of messages; track msg) {
+          <div class="message-wrapper" 
+               [class.user-message]="msg.isUser" 
+               [class.ai-message]="!msg.isUser">
+            
+            <div class="message-bubble" [class.loading]="msg.isLoading">
+              @if (!msg.isLoading) {
+                {{ msg.text }}
+              } @else {
+                <div class="typing-indicator">
+                  <span></span><span></span><span></span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" 
+               [(ngModel)]="userInput" 
+               (keydown)="onKeyDown($event)"
+               placeholder="Ask about my skills..." 
+               class="chat-input">
+        <button class="send-btn" (click)="sendMessage()" [disabled]="!userInput.trim()">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  }
+</div>
