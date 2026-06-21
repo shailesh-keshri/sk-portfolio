@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, Inject, PLA
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 // @ts-ignore: untyped NPM package
 import webglFluid from 'webgl-fluid';
+import { defaultFluidConfig } from './cosmic-flow.config';
 
 @Component({
   selector: 'app-cosmic-flow',
@@ -64,35 +65,29 @@ export class CosmicFlowComponent implements AfterViewInit, OnDestroy {
 
     // Initialize PavelDoGreat's WebGL Fluid engine
     try {
-      webglFluid(canvas, {
-        IMMEDIATE: true, // true = Splashes randomly on page load. false = Waits for mouse movement.
-        TRIGGER: 'hover', // 'hover' = splat on mouse move. 'click' = splat only on mouse click.
-        SIM_RESOLUTION: 128, // Higher = More detailed fluid physics but heavier on CPU/GPU. Lower = blocky/fast.
-        DYE_RESOLUTION: 1024, // Higher = Sharper, more HD color rendering. Lower = blurry/pixelated colors.
-        CAPTURE_RESOLUTION: 512, // Resolution of the canvas snapshot if the user captures it.
-        DENSITY_DISSIPATION: 1.2, // How fast colors fade to black. Higher = fades very quickly. Lower = colors linger on screen.
-        VELOCITY_DISSIPATION: 1.2, // How fast the fluid stops moving. Higher = stops quickly. Lower = fluid keeps drifting for a long time.
-        PRESSURE: 0.4, // How much the fluid expands outwards. Higher = fluid bursts outward aggressively.
-        PRESSURE_ITERATIONS: 20, // Physics accuracy for pressure. Higher = more accurate but slower performance.
-        CURL: 50, // Swirliness. Higher = lots of tiny spinning vortexes. Lower = smooth, straight lines.
-        SPLAT_RADIUS: 0.2, // Size of the mouse cursor brush. Higher = massive paint splashes. Lower = thin pen strokes.
-        SPLAT_FORCE: 4000, // How fast the fluid shoots out from the mouse. Higher = violent, fast shooting fluid.
-        SHADING: true, // true = gives the fluid a 3D lighting effect. false = flat 2D colors.
-        COLORFUL: true, // true = cycles through the rainbow. false = uses a single static color.
-        COLOR_UPDATE_SPEED: 15, // How fast it cycles through the rainbow. Higher = rapid disco colors.
-        PAUSED: false, // true = freezes the animation entirely.
-        BACK_COLOR: { r: 0, g: 0, b: 0 }, // RGB background color. Keep at 0,0,0 if TRANSPARENT is true.
-        TRANSPARENT: true, // true = allows the website's dark background to show through.
-        BLOOM: true, // true = enables the glowing neon effect.
-        BLOOM_ITERATIONS: 7, // Quality of the glow. Higher = smoother glow.
-        BLOOM_RESOLUTION: 256, // Resolution of the glow. Higher = sharper light shafts.
-        BLOOM_INTENSITY: 0.3, // Brightness of the glow. Higher = blinding neon. Lower = subtle soft glow.
-        BLOOM_THRESHOLD: 0.8, // How bright a pixel needs to be before it starts glowing.
-        BLOOM_SOFT_KNEE: 0.7, // Smoothness of the glow cutoff transition.
-        SUNRAYS: false, // true = enables cinematic light rays shooting out of the fluid.
-        SUNRAYS_RESOLUTION: 196, // Quality of the light rays.
-        SUNRAYS_WEIGHT: 1.0, // Intensity/length of the light rays.
-      });
+      // HACK: webgl-fluid automatically binds the spacebar to document/window 'keydown' or 'keyup' 
+      // to toggle the PAUSE state of the simulation. This freezes the canvas!
+      // We temporarily override addEventListener to block ALL keyboard registrations.
+      const originalWindowAddEventListener = window.addEventListener.bind(window);
+      const originalDocumentAddEventListener = document.addEventListener.bind(document);
+
+      const blockKeyboard = function (originalFn: any) {
+        return function (type: string, listener: any, options: any) {
+          if (['keydown', 'keyup', 'keypress'].includes(type)) {
+            return; // Block completely
+          }
+          originalFn(type, listener, options);
+        };
+      };
+
+      window.addEventListener = blockKeyboard(originalWindowAddEventListener) as any;
+      document.addEventListener = blockKeyboard(originalDocumentAddEventListener) as any;
+
+      webglFluid(canvas, defaultFluidConfig);
+
+      // Restore native window/document behavior immediately
+      window.addEventListener = originalWindowAddEventListener;
+      document.addEventListener = originalDocumentAddEventListener;
     } catch (e) {
       console.warn("WebGL Fluid failed to initialize on this device.", e);
     }
