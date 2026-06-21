@@ -17,10 +17,22 @@ export class ChatbotComponent implements AfterViewChecked {
   userInput = '';
   messages: UiMessage[] = [];
 
+  suggestedMessages = [
+    "Skills",
+    "Projects",
+    "Experience",
+    "Contact Info"
+  ];
+
   constructor(private chatService: ChatService) {
     this.chatService.messages$.subscribe(msgs => {
       this.messages = msgs;
     });
+  }
+
+  sendSuggested(text: string) {
+    this.userInput = text;
+    this.sendMessage();
   }
 
   ngAfterViewChecked() {

@@ -35,7 +35,18 @@
             </div>
           </div>
         }
+
       </div>
+
+      @if (messages.length === 1) {
+        <div class="suggestions-container">
+          @for (suggestion of suggestedMessages; track suggestion) {
+            <button class="suggestion-chip glass" (click)="sendSuggested(suggestion)">
+              {{ suggestion }}
+            </button>
+          }
+        </div>
+      }
 
       <div class="chat-input-area">
         <input type="text" 
