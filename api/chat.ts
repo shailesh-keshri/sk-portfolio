@@ -1,5 +1,12 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+// Prevent Vercel from timing out the function before Gemini finishes (Hobby max is 60s)
+export const maxDuration = 60;
+
+// Force Vercel to deploy this function in the US (Washington D.C.). 
+// Gemini API is blocked in some European Vercel datacenters and will throw a 500 error!
+export const preferredRegion = 'iad1';
+
 export default async function handler(req: any, res: any) {
   // CORS Headers: Locked down to prevent abuse
   const origin = req.headers.origin || '';
@@ -8,9 +15,9 @@ export default async function handler(req: any, res: any) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
     // If you ever buy a custom domain (e.g. shaileshkeshri.com), add it to the if-statement above!
-    res.setHeader('Access-Control-Allow-Origin', 'https://your-production-url.vercel.app'); 
+    res.setHeader('Access-Control-Allow-Origin', 'https://your-production-url.vercel.app');
   }
-  
+
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
