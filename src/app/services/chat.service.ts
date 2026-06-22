@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -29,29 +29,38 @@ export class ChatService {
   // For safety, we will just use /api/chat and rely on Vercel or proxy.
   private apiUrl = '/api/chat';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private ngZone: NgZone) {}
 
-  async sendMessage(text: string) {
+  async sendMessage(text: string, model: string = 'gemini-2.5-flash') {
     if (!text.trim()) return;
 
     const currentMessages = this.messagesSubject.value;
     
     // Add user message to UI immediately
-    this.messagesSubject.next([
-      ...currentMessages,
-      { text, isUser: true },
-      { text: '', isUser: false, isLoading: true } // Typing indicator
-    ]);
+    this.ngZone.run(() => {
+      this.messagesSubject.next([
+        ...currentMessages,
+        { text, isUser: true },
+        { text: '', isUser: false, isLoading: true } // Typing indicator
+      ]);
+    });
 
     try {
       const response = await fetch(this.apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: this.history })
+        body: JSON.stringify({ message: text, history: this.history, model })
       });
 
       if (!response.ok) {
-        throw new Error(`Server returned status: ${response.status}`);
+        let serverError = `Server returned status: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          if (errorData && errorData.error) {
+            serverError = errorData.error;
+          }
+        } catch (e) {} // ignore json parse errors
+        throw new Error(serverError);
       }
 
       if (!response.body) throw new Error("No response body stream");
@@ -81,7 +90,9 @@ export class ChatService {
               aiMessage.text += data.text;
               
               // Force UI update progressively
-              this.messagesSubject.next([...baseMessages, aiMessage]);
+              this.ngZone.run(() => {
+                this.messagesSubject.next([...baseMessages, aiMessage]);
+              });
             } catch (e) {
               // Ignore incomplete JSON parsing errors on stream boundaries
             }
@@ -95,13 +106,26 @@ export class ChatService {
 
     } catch (error: any) {
       console.error('Chat API Error:', error);
-      const errorMessage = 'Oops! The AI backend seems to be down right now. Please try again later.';
+      
+      let errorMessage = 'Oops! The AI backend seems to be down right now. Please try again later.';
+      
+      if (error.message) {
+        const lowerError = error.message.toLowerCase();
+        if (lowerError.includes('429') || lowerError.includes('quota') || lowerError.includes('limit')) {
+          errorMessage = "This AI model is currently receiving too many requests and has reached its limit. Please select a different model from the menu icon next to the Send button.";
+        } else if (error.message.includes('Backend Error')) {
+          errorMessage = error.message.replace('Backend Error:', '').trim();
+        }
+      }
 
-      const updatedMessages = this.messagesSubject.value.filter(m => !m.isLoading);
-      this.messagesSubject.next([
-        ...updatedMessages,
-        { text: errorMessage, isUser: false }
-      ]);
+      // Remove the typing indicator AND push the error message
+      this.ngZone.run(() => {
+        const updatedMessages = this.messagesSubject.value.filter(m => !m.isLoading);
+        this.messagesSubject.next([
+          ...updatedMessages,
+          { text: `⚠️ **Error:** ${errorMessage}`, isUser: false }
+        ]);
+      });
     }
   }
 }

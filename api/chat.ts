@@ -39,10 +39,13 @@ export default async function handler(req: Request) {
     if (bodyText) {
       try { body = JSON.parse(bodyText); } catch (e) { }
     }
-    const { message, history } = body;
+    const { message, history, model: requestedModel } = body;
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    
+    // Use the model requested by the user, or default to 2.5 flash
+    const selectedModelName = requestedModel || 'gemini-2.5-flash';
+    const model = genAI.getGenerativeModel({ model: selectedModelName });
 
     const systemPrompt = `You are the AI assistant for Shailesh Keshri, a Full-Stack Developer with over 4 years of experience.
 Your goal is to answer questions from recruiters and visitors about Shailesh's professional experience.

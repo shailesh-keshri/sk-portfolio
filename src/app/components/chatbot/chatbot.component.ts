@@ -12,10 +12,17 @@ import { ChatService, UiMessage } from '../../services/chat.service';
 })
 export class ChatbotComponent implements AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer!: ElementRef;
-  
+
   isOpen = false;
   userInput = '';
+  selectedModel = 'gemini-2.5-flash';
+  isModelMenuOpen = false;
   messages: UiMessage[] = [];
+
+  availableModels = [
+    { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash' },
+    { id: 'gemini-3.5-flash', name: 'Gemini 3.5 Flash (Medium)' }
+  ];
 
   suggestedMessages = [
     "Skills",
@@ -48,9 +55,18 @@ export class ChatbotComponent implements AfterViewChecked {
 
   sendMessage() {
     if (this.userInput.trim()) {
-      this.chatService.sendMessage(this.userInput);
+      this.chatService.sendMessage(this.userInput, this.selectedModel);
       this.userInput = '';
     }
+  }
+
+  toggleModelMenu() {
+    this.isModelMenuOpen = !this.isModelMenuOpen;
+  }
+
+  selectModel(modelId: string) {
+    this.selectedModel = modelId;
+    this.isModelMenuOpen = false;
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -62,6 +78,6 @@ export class ChatbotComponent implements AfterViewChecked {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) { }
   }
 }
