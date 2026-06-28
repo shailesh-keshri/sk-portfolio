@@ -28,6 +28,7 @@ export class ChatbotComponent implements AfterViewChecked {
     "Skills",
     "Projects",
     "Experience",
+    "Freelance Rates",
     "Contact Info"
   ];
 
@@ -79,5 +80,44 @@ export class ChatbotComponent implements AfterViewChecked {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
+  }
+
+  formatMessage(text: string): string {
+    if (!text) return '';
+    let html = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    const lines = html.split('\n');
+    const processedLines = lines.map(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        return `<div class="chat-bullet">• ${trimmed.substring(2)}</div>`;
+      }
+      return line;
+    });
+
+    return processedLines.join('<br>');
+  }
+
+  hasPricingKeywords(text: string): boolean {
+    if (!text) return false;
+    const lower = text.toLowerCase();
+    return lower.includes('quotation') || lower.includes('charges') || lower.includes('pricing') || lower.includes('estimated base');
+  }
+
+  scrollToPricing() {
+    this.chatService.showPricing();
+    setTimeout(() => {
+      const element = document.getElementById('pricing');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   }
 }

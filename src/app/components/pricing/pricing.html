@@ -1,0 +1,76 @@
+<section id="pricing" class="pricing-section reveal">
+  <div class="grid-bg"></div>
+  <div class="container">
+    @if (!isVisible) {
+      <div class="pricing-teaser glass">
+        <div class="teaser-left">
+          <div class="teaser-icon">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div class="teaser-content">
+            <h3 class="teaser-title">Looking for Freelance Services?</h3>
+            <p class="teaser-desc">Shailesh is open to freelance, contract, or project-based development work alongside permanent opportunities.</p>
+          </div>
+        </div>
+        <button class="teaser-btn" (click)="revealPricing()">
+          View Freelance Quotation
+        </button>
+      </div>
+    } @else {
+      <div class="section-header">
+        <h2 class="section-title">Freelance <span class="gradient-text">Quotation</span></h2>
+        <p class="section-subtitle">Transparent and competitive pricing packages tailored to your development needs. Toggle between currencies below.</p>
+      </div>
+
+      <!-- Currency Toggle -->
+      <div class="currency-toggle-wrapper">
+        <span [class.active]="!isDollar">INR (₹)</span>
+        <button class="currency-switch glass" (click)="toggleCurrency()" [attr.aria-label]="'Switch to ' + (isDollar ? 'INR' : 'USD')">
+          <span class="switch-handle" [class.dollar]="isDollar"></span>
+        </button>
+        <span [class.active]="isDollar">USD ($)</span>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="pricing-grid">
+        @for (pkg of packages; track pkg.title) {
+          <div class="pricing-card glass">
+            <div class="card-glow"></div>
+            
+            <div class="card-header">
+              <div class="card-icon">
+                <i class="fa-solid" [class]="pkg.icon"></i>
+              </div>
+              <h3 class="package-title">{{ pkg.title }}</h3>
+            </div>
+
+            <div class="price-container">
+              <span class="currency-symbol">{{ isDollar ? '$' : '₹' }}</span>
+              <span class="price-amount">{{ isDollar ? pkg.usdPrice : pkg.inrPrice }}</span>
+              <span class="price-suffix">est. base</span>
+            </div>
+
+            <ul class="features-list">
+              @for (feature of pkg.features; track feature) {
+                <li>
+                  <i class="fa-solid fa-circle-check feature-check"></i>
+                  <span>{{ feature }}</span>
+                </li>
+              }
+            </ul>
+
+            <button class="card-btn" (click)="bookProject(pkg.title)">
+              Book Project
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Extra Note -->
+      <div class="pricing-note glass">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>Have custom requirements not covered in these packages? Shailesh's base freelance rate is <strong>{{ isDollar ? '$30 - $50' : '₹2,500 - ₹4,000' }} / hour</strong> depending on project complexity. Please reach out via the contact form to get a personalized quote.</p>
+      </div>
+    }
+  </div>
+</section>

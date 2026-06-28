@@ -9,11 +9,24 @@ import { Achievements } from '../achievements/achievements';
 import { ContactComponent } from '../contact/contact.component';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
 import { CosmicFlowComponent } from '../cosmic-flow/cosmic-flow.component';
+import { Pricing } from '../pricing/pricing';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, IntroductionComponent, About, Skills, Experience, Projects, Achievements, ContactComponent, ChatbotComponent, CosmicFlowComponent],
+  imports: [
+    CommonModule,
+    IntroductionComponent,
+    About,
+    Skills,
+    Experience,
+    Projects,
+    Achievements,
+    Pricing,
+    ContactComponent,
+    ChatbotComponent,
+    CosmicFlowComponent
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

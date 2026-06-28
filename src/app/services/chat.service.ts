@@ -24,6 +24,13 @@ export class ChatService {
   ]);
   public messages$ = this.messagesSubject.asObservable();
 
+  private showPricingSubject = new BehaviorSubject<boolean>(false);
+  public showPricing$ = this.showPricingSubject.asObservable();
+
+  showPricing() {
+    this.showPricingSubject.next(true);
+  }
+
   // If running locally using ng serve, we hit localhost:3000 (if vercel dev is running) 
   // or proxy it. In production, Vercel routes /api requests to the serverless function.
   // For safety, we will just use /api/chat and rely on Vercel or proxy.
@@ -72,31 +79,52 @@ export class ChatService {
       const baseMessages = this.messagesSubject.value.filter(m => !m.isLoading);
       
       // Add an empty AI message that we will progressively fill
-      const aiMessage = { text: '', isUser: false };
+      let aiMessage = { text: '', isUser: false };
       this.messagesSubject.next([...baseMessages, aiMessage]);
 
+      let buffer = '';
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
-        
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
-        
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            if (line.includes('[DONE]')) continue;
+        if (done) {
+          const remainingLine = buffer.trim();
+          if (remainingLine.startsWith('data: ') && !remainingLine.includes('[DONE]')) {
             try {
-              const data = JSON.parse(line.slice(6));
-              aiMessage.text += data.text;
-              
-              // Force UI update progressively
+              const data = JSON.parse(remainingLine.slice(6));
+              aiMessage = { ...aiMessage, text: aiMessage.text + data.text };
               this.ngZone.run(() => {
                 this.messagesSubject.next([...baseMessages, aiMessage]);
               });
             } catch (e) {
+              // ignore
+            }
+          }
+          break;
+        }
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        
+        let textAppended = '';
+        for (const line of lines) {
+          const trimmedLine = line.trim();
+          if (trimmedLine.startsWith('data: ')) {
+            if (trimmedLine.includes('[DONE]')) continue;
+            try {
+              const data = JSON.parse(trimmedLine.slice(6));
+              textAppended += data.text;
+            } catch (e) {
               // Ignore incomplete JSON parsing errors on stream boundaries
             }
           }
+        }
+
+        if (textAppended) {
+          aiMessage = { ...aiMessage, text: aiMessage.text + textAppended };
+          // Force UI update progressively
+          this.ngZone.run(() => {
+            this.messagesSubject.next([...baseMessages, aiMessage]);
+          });
         }
       }
 

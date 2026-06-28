@@ -59,7 +59,7 @@
           <textarea id="message" name="message" [(ngModel)]="formData.message" rows="4" required placeholder="How can we work together?"></textarea>
         </div>
         
-        <button type="submit" class="btn-primary btn-block" [disabled]="contactForm.invalid || status === 'submitting'">
+        <button type="submit" class="btn-submit-contact" [disabled]="contactForm.invalid || status === 'submitting'">
           <span *ngIf="status === 'idle' || status === 'success' || status === 'error'">Send Message <i class="fa-solid fa-paper-plane"></i></span>
           <span *ngIf="status === 'submitting'">Sending... <i class="fa-solid fa-circle-notch fa-spin"></i></span>
         </button>

@@ -47,7 +47,8 @@
   letter-spacing: 1px;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary);
   text-shadow: 0 0 8px var(--primary-glow);
 }
@@ -119,9 +120,10 @@
   box-shadow: 0 0 10px var(--primary-glow);
 }
 
-input:checked + i {
+input:checked+i {
   transform: translateX(24px);
-  background-color: #f39c12; /* Sun color */
+  background-color: #f39c12;
+  /* Sun color */
   box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
 }
 
@@ -169,9 +171,11 @@ input:checked + i {
   .navbar.open .mobile-toggle .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
+
   .navbar.open .mobile-toggle .bar:nth-child(2) {
     opacity: 0;
   }
+
   .navbar.open .mobile-toggle .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }

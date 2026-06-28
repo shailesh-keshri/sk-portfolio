@@ -27,10 +27,16 @@
             
             <div class="message-bubble" [class.loading]="msg.isLoading">
               @if (!msg.isLoading) {
-                {{ msg.text }}
+                <div class="message-text" [innerHTML]="formatMessage(msg.text)"></div>
+                @if (!msg.isUser && hasPricingKeywords(msg.text)) {
+                  <button class="chat-action-btn" (click)="scrollToPricing()">
+                    <i class="fa-solid fa-receipt"></i> View Quotation Page
+                  </button>
+                }
               } @else {
                 <div class="typing-indicator">
-                  <span></span><span></span><span></span>
+                  <span class="loading-text">Getting response...</span>
+                  <i class="fa-solid fa-circle-notch fa-spin loader-icon"></i>
                 </div>
               }
             </div>

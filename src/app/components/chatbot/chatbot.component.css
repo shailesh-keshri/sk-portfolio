@@ -158,24 +158,20 @@
 .typing-indicator {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   height: 20px;
 }
 
-.typing-indicator span {
-  width: 6px;
-  height: 6px;
-  background-color: var(--text-muted);
-  border-radius: 50%;
-  animation: typing 1.4s infinite ease-in-out both;
+.typing-indicator .loading-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
-.typing-indicator span:nth-child(1) {
-  animation-delay: -0.32s;
-}
-
-.typing-indicator span:nth-child(2) {
-  animation-delay: -0.16s;
+.typing-indicator .loader-icon {
+  font-size: 0.85rem;
+  color: var(--icon-color);
+  opacity: 0.8;
 }
 
 @keyframes typing {
@@ -358,4 +354,33 @@
   border-color: #00f2ff;
   color: #00f2ff;
   transform: translateY(-2px);
+}
+
+.chat-bullet {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding-left: 8px;
+}
+
+.chat-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid var(--icon-color);
+  color: var(--icon-color);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.chat-action-btn:hover {
+  background: var(--icon-color);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
 }

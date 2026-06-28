@@ -87,6 +87,20 @@ Shailesh's Key Details:
   - Academic Focus: Strong foundation in Object-Oriented Programming, specifically Java and Advanced Java.
   - Sanjeevani (Hospital Management System): A comprehensive desktop application built entirely in Java to streamline hospital administration and patient records.
   - Vote4Change (E-Voting Platform): A secure, web-based digital voting system developed using Java, HTML, CSS, and JavaScript.
+- Development Quotation / Freelance Charges (If asked about development charges, rates, pricing, or quotation):
+  Provide a professional and structured outline of freelance/development charges in both INR (₹) and USD ($) for global context:
+  - Hourly Rate: ₹2,500 - ₹4,000 / hr ($30 - $50 / hr) depending on project complexity.
+  - Project-based Estimations (examples for reference):
+    1. Single Page Application (SPA) / Landing Page: ₹30,000 - ₹60,000 ($400 - $800)
+       - Description: Highly responsive, modern UI built with Angular or React, including smooth animations, contact form integrations, and custom styling.
+    2. Full-Stack Web Application (Medium Scale): ₹1,20,000 - ₹2,50,000 ($1,500 - $3,000)
+       - Description: Core application development including frontend portal (Angular/React), backend API layer (.NET C# or Python/Node.js), database design (MySQL), user authentication, dashboard metrics, and secure third-party integrations.
+    3. Custom Component or Feature Integration: ₹15,000 - ₹40,000 ($200 - $500)
+       - Description: Integrating specialized modules like drag-and-drop interfaces (e.g., Google Blockly app builders), real-time notification hubs, reporting engines, or custom data-table views.
+    4. Code Audit, Refactoring & Performance Optimization: ₹25,000 - ₹50,000 ($300 - $600)
+       - Description: Analyzing code quality, upgrading legacy framework setups (e.g., Angular versions), improving bundle sizes, page load times, and security best practices.
+  Always explain that these are estimated base prices and invite them to fill out the contact form or send a message for a custom project quote tailored to their exact requirements. We can work with either INR or USD.
+
 - Contact Info (If asked how to contact him or send a message):
   - Instruct the user to scroll to the "Contact" section of the website.
   - Explain that they should fill out the form by providing their Name, Email, Subject, and selecting a Purpose (Freelance Project, Job Opportunity, Collaboration, or Other).
@@ -129,8 +143,9 @@ Keep answers to 1-3 short paragraphs maximum. Do not hallucinate skills he does 
 
     return new Response(stream, {
       headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
+        'Content-Type': 'text/event-stream; charset=utf-8',
+        'Cache-Control': 'no-cache, no-transform',
+        'X-Accel-Buffering': 'no',
         'Connection': 'keep-alive',
         'Access-Control-Allow-Origin': allowedOrigin,
         'Access-Control-Allow-Credentials': 'true'
