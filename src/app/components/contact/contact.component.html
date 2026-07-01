@@ -21,45 +21,112 @@
     </div>
     
     <div class="contact-form-container glass">
-      <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+      <form class="contact-form" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
         <h3>Send a Message</h3>
         
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" [(ngModel)]="formData.name" required placeholder="Your Name">
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              [(ngModel)]="formData.name" 
+              required 
+              #nameInput="ngModel" 
+              placeholder="Your Name"
+              [class.input-error]="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
+            >
+            <div class="error-msg" *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+              <span *ngIf="nameInput.errors?.['required']">Name is required</span>
+            </div>
           </div>
           
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="formData.email" required placeholder="your.email@example.com">
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              [(ngModel)]="formData.email" 
+              required 
+              email 
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+              #emailInput="ngModel" 
+              (input)="validateEmailDomain()"
+              placeholder="your.email@example.com"
+              [class.input-error]="(emailInput.invalid || hasDomainError) && (emailInput.dirty || emailInput.touched)"
+            >
+            <div class="error-msg" *ngIf="(emailInput.invalid || hasDomainError) && (emailInput.dirty || emailInput.touched)">
+              <span *ngIf="emailInput.errors?.['required']">Email is required</span>
+              <span *ngIf="!emailInput.errors?.['required'] && (emailInput.errors?.['email'] || emailInput.errors?.['pattern'])">Please enter a valid email address</span>
+              <span *ngIf="!emailInput.invalid && hasDomainError">Temporary, test, or disposable email addresses are not allowed</span>
+            </div>
           </div>
         </div>
         
         <div class="form-row">
           <div class="form-group">
             <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" [(ngModel)]="formData.subject" required placeholder="What is this regarding?">
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              [(ngModel)]="formData.subject" 
+              required 
+              #subjectInput="ngModel" 
+              placeholder="What is this regarding?"
+              [class.input-error]="subjectInput.invalid && (subjectInput.dirty || subjectInput.touched)"
+            >
+            <div class="error-msg" *ngIf="subjectInput.invalid && (subjectInput.dirty || subjectInput.touched)">
+              <span *ngIf="subjectInput.errors?.['required']">Subject is required</span>
+            </div>
           </div>
           
           <div class="form-group">
             <label for="purpose">Purpose</label>
-            <select id="purpose" name="purpose" [(ngModel)]="formData.purpose" required>
+            <select 
+              id="purpose" 
+              name="purpose" 
+              [(ngModel)]="formData.purpose" 
+              required 
+              #purposeInput="ngModel"
+              [class.input-error]="purposeInput.invalid && (purposeInput.dirty || purposeInput.touched)"
+            >
               <option value="" disabled selected>Select purpose</option>
               <option value="Freelance">Freelance Project</option>
               <option value="Job">Job Opportunity</option>
               <option value="Collaboration">Collaboration</option>
               <option value="Other">Other</option>
             </select>
+            <div class="error-msg" *ngIf="purposeInput.invalid && (purposeInput.dirty || purposeInput.touched)">
+              <span *ngIf="purposeInput.errors?.['required']">Purpose is required</span>
+            </div>
           </div>
         </div>
         
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" [(ngModel)]="formData.message" rows="4" required placeholder="How can we work together?"></textarea>
+          <textarea 
+            id="message" 
+            name="message" 
+            [(ngModel)]="formData.message" 
+            rows="4" 
+            required 
+            minlength="50" 
+            #messageInput="ngModel" 
+            placeholder="How can we work together? (Minimum 50 characters)"
+            [class.input-error]="messageInput.invalid && (messageInput.dirty || messageInput.touched)"
+          ></textarea>
+          <div class="error-msg" *ngIf="messageInput.invalid && (messageInput.dirty || messageInput.touched)">
+            <span *ngIf="messageInput.errors?.['required']">Message is required</span>
+            <span *ngIf="messageInput.errors?.['minlength']">
+              Message must be at least 50 characters long (currently {{ formData.message ? formData.message.length : 0 }}/50)
+            </span>
+          </div>
         </div>
         
-        <button type="submit" class="btn-submit-contact" [disabled]="contactForm.invalid || status === 'submitting'">
+        <button type="submit" class="btn-submit-contact" [disabled]="contactForm.invalid || hasDomainError || status === 'submitting'">
           <span *ngIf="status === 'idle' || status === 'success' || status === 'error'">Send Message <i class="fa-solid fa-paper-plane"></i></span>
           <span *ngIf="status === 'submitting'">Sending... <i class="fa-solid fa-circle-notch fa-spin"></i></span>
         </button>

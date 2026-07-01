@@ -104,7 +104,7 @@ export class ResumeService {
       role: 'Software Engineer',
       internalProjects: [
         {
-          name: 'ProACT (Managed Detection & Response Platform)',
+          name: 'ProACT (Agentic SOC Platform)',
           summary: 'A security platform for enterprise SOC operations.',
           bullets: [
             'Building and enhancing features across frontend (Angular) and backend (.NET C#).',

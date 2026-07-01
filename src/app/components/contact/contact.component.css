@@ -218,6 +218,23 @@
   }
 }
 
+
+.form-group input.input-error,
+.form-group select.input-error,
+.form-group textarea.input-error {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 8px rgba(255, 0, 85, 0.25) !important;
+}
+
+.error-msg {
+  color: var(--accent);
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  display: block;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease;
+}
+
 @media (max-width: 768px) {
   .contact-info-row {
     flex-direction: column;

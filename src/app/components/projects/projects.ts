@@ -21,11 +21,11 @@ export class Projects {
 
   projects = [
     {
-      title: 'ProAct (MXDR Platform)',
+      title: 'ProAct (Agentic SOC Platform)',
       type: 'Work | Cybersecurity',
       icon: 'fa-shield-halved',
       hoverClass: 'hover-cyan',
-      description: 'Enterprise Managed Detection & Response platform. Engineered critical modules for SOC automation and real-time incident handling.',
+      description: 'Enterprise Agentic SOC platform. Engineered critical modules for SOC automation and real-time incident handling.',
       tags: ['Angular', '.NET C#', 'MySQL', 'SOC Automation'],
       highlights: [
         'Threat Detection: Aggregates and correlates network security logs to identify anomalies in real-time.',

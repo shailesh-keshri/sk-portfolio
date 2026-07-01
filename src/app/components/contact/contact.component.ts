@@ -15,6 +15,7 @@ export class ContactComponent {
   private http = inject(HttpClient);
 
   status: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
+  hasDomainError = false;
 
   formData = {
     name: '',
@@ -24,8 +25,60 @@ export class ContactComponent {
     message: ''
   };
 
+  validateEmailDomain() {
+    const email = this.formData.email ? this.formData.email.toLowerCase().trim() : '';
+    if (!email) {
+      this.hasDomainError = false;
+      return;
+    }
+
+    const parts = email.split('@');
+    if (parts.length !== 2) {
+      this.hasDomainError = false;
+      return;
+    }
+
+    const localPart = parts[0];
+    const domain = parts[1];
+
+    const blacklistedDomains = [
+      'test.com', 'example.com', 'example.org', 'example.net', 'invalid.com',
+      'mailinator.com', 'yopmail.com', 'tempmail.com', '10minutemail.com',
+      'temp-mail.org', 'dummy.com', 'fake.com', 'asdf.com', 'trashmail.com'
+    ];
+
+    const blacklistedLocalParts = ['test', 'dummy', 'fake', 'asdf', 'admin', 'user'];
+
+    if (
+      blacklistedDomains.includes(domain) ||
+      blacklistedLocalParts.includes(localPart) ||
+      domain.startsWith('test') ||
+      domain.startsWith('dummy') ||
+      domain.startsWith('fake')
+    ) {
+      this.hasDomainError = true;
+    } else {
+      this.hasDomainError = false;
+    }
+  }
+
   onSubmit(form: NgForm) {
-    if (form.invalid) return;
+    this.validateEmailDomain();
+    if (form.invalid || this.hasDomainError) return;
+
+    // Double-check email format and message minimum length programmatically
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(this.formData.email) || this.hasDomainError) {
+      this.status = 'error';
+      setTimeout(() => this.status = 'idle', 5000);
+      return;
+    }
+
+    if (!this.formData.message || this.formData.message.trim().length < 50) {
+      this.status = 'error';
+      setTimeout(() => this.status = 'idle', 5000);
+      return;
+    }
 
     this.status = 'submitting';
 
@@ -50,6 +103,7 @@ export class ContactComponent {
       next: () => {
         this.status = 'success';
         form.resetForm();
+        this.hasDomainError = false;
         setTimeout(() => this.status = 'idle', 5000);
       },
       error: (err) => {

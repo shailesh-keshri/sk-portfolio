@@ -25,7 +25,7 @@ export class Experience {
       location: 'Bangalore, KA',
       role: 'Software Engineer',
       period: 'Jun 2024 – Present',
-      description: 'Develop and maintain enterprise-grade Managed Detection & Response (MXDR) and compliance platforms.',
+      description: 'Develop and maintain enterprise-grade Agentic SOC and compliance platforms.',
       skills: ['Angular', 'C#', 'REST APIs', 'MySQL'],
       achievements: [
         'Developed and maintained enterprise cybersecurity applications using Angular, C#, REST APIs, and MySQL.',
